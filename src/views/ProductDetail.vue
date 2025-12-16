@@ -87,12 +87,12 @@ const relatedProducts = computed(() => {
               </RouterLink>
               <button
                 @click="cartStore.addToCart(product)"
-                class="px-8 py-4 bg-dark hover:bg-gray-800 text-white rounded-lg font-bold transition-colors flex items-center justify-center gap-2"
+                class="px-8 py-4 bg-dark hover:bg-gray-800 text-white rounded-lg font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
                 <ShoppingBag class="w-5 h-5" /> เพิ่มลงตะกร้า
               </button>
               <button
-                class="px-8 py-4 bg-white border-2 border-gray-200 hover:border-primary hover:text-primary text-gray-700 rounded-lg font-bold transition-colors flex items-center justify-center gap-2"
+                class="px-8 py-4 bg-white border-2 border-gray-200 hover:border-primary hover:text-primary text-gray-700 rounded-lg font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Download class="w-5 h-5" /> ดาวน์โหลด TDS
               </button>

@@ -69,7 +69,7 @@ const cartStore = useCartStore();
                   </h3>
                   <button
                     @click="cartStore.removeFromCart(item.id)"
-                    class="text-gray-400 hover:text-red-500 transition-colors"
+                    class="text-gray-400 hover:text-red-500 transition-colors cursor-pointer"
                   >
                     <Trash2 class="w-4 h-4" />
                   </button>
@@ -83,7 +83,7 @@ const cartStore = useCartStore();
                       @click="
                         cartStore.updateQuantity(item.id, item.quantity - 1)
                       "
-                      class="p-1 hover:bg-gray-50 text-gray-600"
+                      class="p-1 hover:bg-gray-50 text-gray-600 cursor-pointer"
                     >
                       <Minus class="w-4 h-4" />
                     </button>
@@ -94,7 +94,7 @@ const cartStore = useCartStore();
                       @click="
                         cartStore.updateQuantity(item.id, item.quantity + 1)
                       "
-                      class="p-1 hover:bg-gray-50 text-gray-600"
+                      class="p-1 hover:bg-gray-50 text-gray-600 cursor-pointer"
                     >
                       <Plus class="w-4 h-4" />
                     </button>
@@ -125,9 +125,16 @@ const cartStore = useCartStore();
           <RouterLink
             to="/checkout"
             @click="cartStore.toggleCart"
-            class="block w-full py-4 bg-primary hover:bg-blue-700 text-white rounded-lg font-bold text-lg transition-colors shadow-lg shadow-primary/20 text-center"
+            class="block w-full py-4 bg-primary hover:bg-blue-700 text-white rounded-lg font-bold text-lg transition-colors shadow-lg shadow-primary/20 text-center mb-3"
           >
             ชำระเงิน
+          </RouterLink>
+          <RouterLink
+            to="/request-quotation"
+            @click="cartStore.toggleCart"
+            class="block w-full py-3 bg-white border-2 border-primary text-primary hover:bg-blue-50 rounded-lg font-bold text-lg transition-colors text-center"
+          >
+            ขอใบเสนอราคา
           </RouterLink>
         </div>
       </div>

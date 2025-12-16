@@ -47,6 +47,11 @@ const routes = [
         component: () => import("../views/Checkout.vue"),
       },
       {
+        path: "request-quotation",
+        name: "RequestQuotation",
+        component: () => import("../views/RequestQuotation.vue"),
+      },
+      {
         path: ":pathMatch(.*)*",
         name: "NotFound",
         component: () => import("../views/NotFound.vue"),
