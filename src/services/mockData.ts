@@ -45,29 +45,29 @@ export const products: Product[] = Array.from({ length: 100 }, (_, i) => {
 export const articles: Article[] = [
   {
     id: 1,
-    title: "How to Choose the Right Water Treatment Chemicals",
+    title: "วิธีเลือกสารเคมีบำบัดน้ำที่เหมาะสม",
     excerpt:
-      "A comprehensive guide to selecting the best chemicals for your water treatment plant.",
-    content: "Full content about water treatment...",
-    date: "2023-10-15",
+      "คู่มือที่ครอบคลุมในการเลือกสารเคมีที่ดีที่สุดสำหรับโรงบำบัดน้ำของคุณ",
+    content: "เนื้อหาเต็มเกี่ยวกับการบำบัดน้ำ...",
+    date: "15 ตุลาคม 2566",
     image: "https://placehold.co/800x400?text=Water+Treatment",
   },
   {
     id: 2,
-    title: "Safety Guidelines for Industrial Solvents",
+    title: "แนวทางความปลอดภัยสำหรับตัวทำละลายอุตสาหกรรม",
     excerpt:
-      "Essential safety tips for handling and storing industrial solvents.",
-    content: "Full content about safety...",
-    date: "2023-10-20",
+      "เคล็ดลับความปลอดภัยที่สำคัญสำหรับการจัดการและการจัดเก็บตัวทำละลายอุตสาหกรรม",
+    content: "เนื้อหาเต็มเกี่ยวกับความปลอดภัย...",
+    date: "20 ตุลาคม 2566",
     image: "https://placehold.co/800x400?text=Safety",
   },
   {
     id: 3,
-    title: "Cost Reduction with Alternative Chemicals",
+    title: "ลดต้นทุนด้วยสารเคมีทางเลือก",
     excerpt:
-      "Learn how to reduce production costs by switching to alternative chemical solutions.",
-    content: "Full content about cost reduction...",
-    date: "2023-10-25",
+      "เรียนรู้วิธีลดต้นทุนการผลิตด้วยการเปลี่ยนไปใช้โซลูชันสารเคมีทางเลือก",
+    content: "เนื้อหาเต็มเกี่ยวกับการลดต้นทุน...",
+    date: "25 ตุลาคม 2566",
     image: "https://placehold.co/800x400?text=Cost+Reduction",
   },
 ];
