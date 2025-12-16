@@ -211,7 +211,7 @@ const getStatusColor = (status: string) => {
           <button
             @click="prevPage"
             :disabled="currentPage === 1"
-            class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
           >
             <ChevronLeft class="w-5 h-5 text-gray-600" />
           </button>
@@ -221,7 +221,7 @@ const getStatusColor = (status: string) => {
           <button
             @click="nextPage"
             :disabled="currentPage === totalPages"
-            class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
           >
             <ChevronRight class="w-5 h-5 text-gray-600" />
           </button>

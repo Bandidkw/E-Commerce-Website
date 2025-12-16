@@ -166,7 +166,7 @@ const saveNotifications = () => {
             <div class="pt-4">
               <button
                 type="submit"
-                class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+                class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <Save class="w-4 h-4" />
                 บันทึกข้อมูล
@@ -218,7 +218,7 @@ const saveNotifications = () => {
             <div class="pt-4">
               <button
                 type="submit"
-                class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+                class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <Save class="w-4 h-4" />
                 เปลี่ยนรหัสผ่าน
@@ -273,7 +273,7 @@ const saveNotifications = () => {
             <div class="pt-4">
               <button
                 type="submit"
-                class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+                class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <Save class="w-4 h-4" />
                 บันทึกการตั้งค่า
@@ -355,7 +355,7 @@ const saveNotifications = () => {
             <div class="pt-4">
               <button
                 type="submit"
-                class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+                class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <Save class="w-4 h-4" />
                 บันทึกการตั้งค่า

@@ -65,7 +65,7 @@ const setCategory = (category: string) => {
               <li>
                 <button
                   @click="setCategory('All')"
-                  class="w-full text-left px-4 py-2 rounded-lg transition-colors"
+                  class="w-full text-left px-4 py-2 rounded-lg transition-colors cursor-pointer"
                   :class="
                     selectedCategory === 'All'
                       ? 'bg-primary text-white'
@@ -78,7 +78,7 @@ const setCategory = (category: string) => {
               <li v-for="category in categories" :key="category">
                 <button
                   @click="setCategory(category)"
-                  class="w-full text-left px-4 py-2 rounded-lg transition-colors"
+                  class="w-full text-left px-4 py-2 rounded-lg transition-colors cursor-pointer"
                   :class="
                     selectedCategory === category
                       ? 'bg-primary text-white'
