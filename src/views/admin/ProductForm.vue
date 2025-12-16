@@ -2,7 +2,7 @@
 import { ref, onMounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useProductStore } from "../../stores/products";
-import { ArrowLeft, Save } from "lucide-vue-next";
+import { ArrowLeft, Save, Upload, Trash2 } from "lucide-vue-next";
 import { categories } from "../../services/mockData";
 
 const route = useRoute();
@@ -31,6 +31,17 @@ onMounted(() => {
   }
 });
 
+const handleFileUpload = (event: Event) => {
+  const file = (event.target as HTMLInputElement).files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      form.value.image = e.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
 const saveProduct = () => {
   if (isEditing.value) {
     productStore.updateProduct(productId, form.value);
@@ -51,7 +62,7 @@ const saveProduct = () => {
         <ArrowLeft class="w-6 h-6 text-gray-600" />
       </RouterLink>
       <h1 class="text-2xl font-bold">
-        {{ isEditing ? "Edit Product" : "Add New Product" }}
+        {{ isEditing ? "แก้ไขข้อมูลสินค้า" : "เพิ่มสินค้าใหม่" }}
       </h1>
     </div>
 
@@ -60,7 +71,7 @@ const saveProduct = () => {
         <!-- Name -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1"
-            >Product Name</label
+            >ชื่อสินค้า</label
           >
           <input
             v-model="form.name"
@@ -74,14 +85,14 @@ const saveProduct = () => {
           <!-- Category -->
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1"
-              >Category</label
+              >หมวดหมู่</label
             >
             <select
               v-model="form.category"
               required
               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none bg-white"
             >
-              <option value="" disabled>Select a category</option>
+              <option value="" disabled>เลือกหมวดหมู่</option>
               <option
                 v-for="category in categories"
                 :key="category"
@@ -95,7 +106,7 @@ const saveProduct = () => {
           <!-- Price -->
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1"
-              >Price ($)</label
+              >ราคา (บาท)</label
             >
             <input
               v-model="form.price"
@@ -108,24 +119,63 @@ const saveProduct = () => {
           </div>
         </div>
 
-        <!-- Image URL -->
+        <!-- Image Upload -->
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1"
-            >Image URL</label
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >รูปภาพสินค้า</label
           >
-          <input
-            v-model="form.image"
-            type="text"
-            required
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
-          />
-          <p class="text-xs text-gray-500 mt-1">Enter a valid image URL.</p>
+
+          <!-- Image Preview -->
+          <div
+            v-if="form.image"
+            class="mb-4 relative w-full h-64 bg-gray-100 rounded-lg overflow-hidden group"
+          >
+            <img
+              :src="form.image"
+              alt="Preview"
+              class="w-full h-full object-contain"
+            />
+            <div
+              class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <button
+                type="button"
+                @click="form.image = ''"
+                class="p-2 bg-white text-red-500 rounded-full hover:bg-gray-100 transition-colors"
+                title="ลบรูปภาพ"
+              >
+                <Trash2 class="w-6 h-6" />
+              </button>
+            </div>
+          </div>
+
+          <!-- Upload Area -->
+          <div v-else>
+            <label
+              class="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors"
+            >
+              <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <Upload class="w-10 h-10 text-gray-400 mb-3" />
+                <p class="mb-2 text-sm text-gray-500">
+                  <span class="font-semibold">คลิกเพื่ออัปโหลด</span>
+                  หรือลากไฟล์มาวาง
+                </p>
+                <p class="text-xs text-gray-500">PNG, JPG, GIF (สูงสุด 5MB)</p>
+              </div>
+              <input
+                type="file"
+                class="hidden"
+                accept="image/*"
+                @change="handleFileUpload"
+              />
+            </label>
+          </div>
         </div>
 
         <!-- Description -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1"
-            >Description</label
+            >รายละเอียดสินค้า</label
           >
           <textarea
             v-model="form.description"
@@ -141,7 +191,7 @@ const saveProduct = () => {
             class="px-8 py-3 bg-primary hover:bg-blue-700 text-white rounded-lg font-bold transition-colors flex items-center gap-2"
           >
             <Save class="w-5 h-5" />
-            Save Product
+            บันทึกข้อมูล
           </button>
         </div>
       </form>

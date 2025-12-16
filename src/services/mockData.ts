@@ -18,27 +18,27 @@ export interface Article {
 }
 
 export const categories = [
-  "Water Treatment Chemicals",
-  "Industrial Solvents",
-  "Food Additives",
-  "Textile Chemicals",
-  "General Chemicals"
+  "สารเคมีบำบัดน้ำ",
+  "ตัวทำละลายอุตสาหกรรม",
+  "สารเจือปนอาหาร",
+  "สารเคมีสิ่งทอ",
+  "สารเคมีทั่วไป",
 ];
 
 export const products: Product[] = Array.from({ length: 100 }, (_, i) => {
-  const category = categories[i % categories.length] || "General Chemicals";
+  const category = categories[i % categories.length] || "สารเคมีทั่วไป";
   return {
     id: i + 1,
-    name: `${category} Product ${i + 1}`,
+    name: `${category} รายการที่ ${i + 1}`,
     category,
-    description: `High quality ${category} for industrial use. Certified standard.`,
+    description: `สารเคมี${category}คุณภาพสูงสำหรับโรงงานอุตสาหกรรม ผ่านการรับรองมาตรฐานสากล`,
     price: Math.floor(Math.random() * 1000) + 100,
-    image: `https://placehold.co/600x400?text=Product+${i + 1}`,
+    image: `https://placehold.co/600x400?text=Chemical+${i + 1}`,
     specs: {
-      "Purity": "99%",
-      "Grade": "Industrial",
-      "Packaging": "25kg Bag"
-    }
+      ความบริสุทธิ์: "99%",
+      เกรด: "อุตสาหกรรม",
+      บรรจุภัณฑ์: "ถุง 25 กก.",
+    },
   };
 });
 
@@ -46,25 +46,28 @@ export const articles: Article[] = [
   {
     id: 1,
     title: "How to Choose the Right Water Treatment Chemicals",
-    excerpt: "A comprehensive guide to selecting the best chemicals for your water treatment plant.",
+    excerpt:
+      "A comprehensive guide to selecting the best chemicals for your water treatment plant.",
     content: "Full content about water treatment...",
     date: "2023-10-15",
-    image: "https://placehold.co/800x400?text=Water+Treatment"
+    image: "https://placehold.co/800x400?text=Water+Treatment",
   },
   {
     id: 2,
     title: "Safety Guidelines for Industrial Solvents",
-    excerpt: "Essential safety tips for handling and storing industrial solvents.",
+    excerpt:
+      "Essential safety tips for handling and storing industrial solvents.",
     content: "Full content about safety...",
     date: "2023-10-20",
-    image: "https://placehold.co/800x400?text=Safety"
+    image: "https://placehold.co/800x400?text=Safety",
   },
   {
     id: 3,
     title: "Cost Reduction with Alternative Chemicals",
-    excerpt: "Learn how to reduce production costs by switching to alternative chemical solutions.",
+    excerpt:
+      "Learn how to reduce production costs by switching to alternative chemical solutions.",
     content: "Full content about cost reduction...",
     date: "2023-10-25",
-    image: "https://placehold.co/800x400?text=Cost+Reduction"
-  }
+    image: "https://placehold.co/800x400?text=Cost+Reduction",
+  },
 ];

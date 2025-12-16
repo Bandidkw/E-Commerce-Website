@@ -12,45 +12,45 @@ import {
 const orders = ref([
   {
     id: 1001,
-    customer: "John Doe",
+    customer: "สมชาย ใจดี",
     date: "2024-03-15",
     total: 1250.0,
-    status: "Completed",
+    status: "เสร็จสมบูรณ์",
   },
   {
     id: 1002,
-    customer: "Jane Smith",
+    customer: "สมหญิง รักดี",
     date: "2024-03-14",
     total: 850.5,
-    status: "Processing",
+    status: "กำลังดำเนินการ",
   },
   {
     id: 1003,
-    customer: "Acme Corp",
+    customer: "บจก. เอซีมี",
     date: "2024-03-14",
     total: 5400.0,
-    status: "Shipped",
+    status: "จัดส่งแล้ว",
   },
   {
     id: 1004,
-    customer: "Tech Solutions",
+    customer: "เทค โซลูชั่นส์",
     date: "2024-03-13",
     total: 2100.0,
-    status: "Pending",
+    status: "รอดำเนินการ",
   },
   {
     id: 1005,
-    customer: "Global Traders",
+    customer: "โกลบอล เทรดเดอร์ส",
     date: "2024-03-12",
     total: 3200.0,
-    status: "Completed",
+    status: "เสร็จสมบูรณ์",
   },
   {
     id: 1006,
-    customer: "Small Biz Inc",
+    customer: "ธุรกิจขนาดย่อม",
     date: "2024-03-11",
     total: 150.0,
-    status: "Processing",
+    status: "กำลังดำเนินการ",
   },
 ]);
 
@@ -98,13 +98,13 @@ watch([searchQuery, statusFilter], () => {
 
 const getStatusColor = (status: string) => {
   switch (status) {
-    case "Completed":
+    case "เสร็จสมบูรณ์":
       return "bg-green-100 text-green-700";
-    case "Processing":
+    case "กำลังดำเนินการ":
       return "bg-blue-100 text-blue-700";
-    case "Shipped":
+    case "จัดส่งแล้ว":
       return "bg-purple-100 text-purple-700";
-    case "Pending":
+    case "รอดำเนินการ":
       return "bg-yellow-100 text-yellow-700";
     default:
       return "bg-gray-100 text-gray-700";
@@ -137,10 +137,10 @@ const getStatusColor = (status: string) => {
             class="bg-gray-50 border-none outline-none text-gray-600 py-2 px-4 rounded-lg cursor-pointer"
           >
             <option value="All">สถานะทั้งหมด</option>
-            <option value="Completed">เสร็จสมบูรณ์</option>
-            <option value="Processing">กำลังดำเนินการ</option>
-            <option value="Shipped">จัดส่งแล้ว</option>
-            <option value="Pending">รอดำเนินการ</option>
+            <option value="เสร็จสมบูรณ์">เสร็จสมบูรณ์</option>
+            <option value="กำลังดำเนินการ">กำลังดำเนินการ</option>
+            <option value="จัดส่งแล้ว">จัดส่งแล้ว</option>
+            <option value="รอดำเนินการ">รอดำเนินการ</option>
           </select>
         </div>
       </div>
@@ -169,7 +169,7 @@ const getStatusColor = (status: string) => {
               <td class="p-4 text-gray-600">{{ order.customer }}</td>
               <td class="p-4 text-gray-500">{{ order.date }}</td>
               <td class="p-4 font-bold text-dark">
-                ${{ order.total.toFixed(2) }}
+                ฿{{ order.total.toFixed(2) }}
               </td>
               <td class="p-4">
                 <span

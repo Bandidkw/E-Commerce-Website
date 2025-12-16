@@ -115,7 +115,7 @@ const deleteProduct = (id: number) => {
               </td>
               <td class="p-4 font-medium text-gray-900">{{ product.name }}</td>
               <td class="p-4 text-gray-600">{{ product.category }}</td>
-              <td class="p-4 font-bold text-dark">${{ product.price }}</td>
+              <td class="p-4 font-bold text-dark">฿{{ product.price }}</td>
               <td class="p-4 text-right">
                 <div class="flex items-center justify-end gap-2">
                   <RouterLink

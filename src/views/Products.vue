@@ -2,8 +2,9 @@
 import { ref, computed } from "vue";
 import { products, categories } from "../services/mockData";
 import { Search, Filter } from "lucide-vue-next";
-import { RouterLink, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 import { watch } from "vue";
+import ProductCard from "../components/ProductCard.vue";
 
 const route = useRoute();
 const selectedCategory = ref("All");
@@ -112,44 +113,11 @@ const setCategory = (category: string) => {
             v-if="paginatedProducts.length > 0"
             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            <div
+            <ProductCard
               v-for="product in paginatedProducts"
               :key="product.id"
-              class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden group"
-            >
-              <div class="relative h-48 overflow-hidden">
-                <img
-                  :src="product.image"
-                  :alt="product.name"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div
-                  class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary"
-                >
-                  {{ product.category }}
-                </div>
-              </div>
-              <div class="p-6">
-                <h3
-                  class="text-lg font-bold mb-2 group-hover:text-primary transition-colors"
-                >
-                  {{ product.name }}
-                </h3>
-                <p class="text-gray-500 text-sm mb-4 line-clamp-2">
-                  {{ product.description }}
-                </p>
-                <div class="flex items-center justify-between">
-                  <span class="text-lg font-bold text-dark"
-                    >${{ product.price }}</span
-                  >
-                  <RouterLink
-                    :to="`/products/${product.id}`"
-                    class="text-sm font-medium text-primary hover:underline"
-                    >ดูรายละเอียด</RouterLink
-                  >
-                </div>
-              </div>
-            </div>
+              :product="product"
+            />
           </div>
 
           <div v-else class="text-center py-20 bg-white rounded-xl shadow-sm">

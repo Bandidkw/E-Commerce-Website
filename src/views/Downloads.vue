@@ -4,35 +4,35 @@ import { FileText, Download } from "lucide-vue-next";
 const documents = [
   {
     id: 1,
-    name: "Product Catalog 2024",
+    name: "แคตตาล็อกสินค้า 2024",
     type: "PDF",
     size: "5.2 MB",
     date: "2023-11-01",
   },
   {
     id: 2,
-    name: "Safety Guidelines Manual",
+    name: "คู่มือความปลอดภัย",
     type: "PDF",
     size: "2.8 MB",
     date: "2023-10-15",
   },
   {
     id: 3,
-    name: "ISO 9001:2015 Certificate",
+    name: "ใบรับรอง ISO 9001:2015",
     type: "PDF",
     size: "1.1 MB",
     date: "2023-01-20",
   },
   {
     id: 4,
-    name: "Company Profile",
+    name: "ข้อมูลบริษัท",
     type: "PDF",
     size: "3.5 MB",
     date: "2023-09-10",
   },
   {
     id: 5,
-    name: "Terms and Conditions",
+    name: "ข้อกำหนดและเงื่อนไข",
     type: "PDF",
     size: "0.5 MB",
     date: "2023-01-01",
@@ -44,10 +44,10 @@ const documents = [
   <div class="bg-gray-50 min-h-screen py-16">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
-        <h1 class="text-3xl font-bold mb-4">Downloads Center</h1>
+        <h1 class="text-3xl font-bold mb-4">ศูนย์ดาวน์โหลดเอกสาร</h1>
         <p class="text-gray-600 mb-12">
-          Access our latest product catalogs, safety manuals, and
-          certifications.
+          ดาวน์โหลดแคตตาล็อกสินค้า คู่มือความปลอดภัย และใบรับรองต่างๆ
+          ของเราได้ที่นี่
         </p>
 
         <div class="bg-white rounded-xl shadow-sm overflow-hidden">
@@ -70,7 +70,7 @@ const documents = [
                     <span>•</span>
                     <span>{{ doc.size }}</span>
                     <span>•</span>
-                    <span>Updated {{ doc.date }}</span>
+                    <span>อัปเดตเมื่อ {{ doc.date }}</span>
                   </div>
                 </div>
               </div>
@@ -85,17 +85,16 @@ const documents = [
 
         <div class="mt-12 bg-blue-50 rounded-xl p-8 text-center">
           <h3 class="text-xl font-bold mb-2 text-primary">
-            Need specific documentation?
+            ต้องการเอกสารเฉพาะเจาะจง?
           </h3>
           <p class="text-gray-600 mb-6">
-            If you can't find what you're looking for, please contact our
-            support team.
+            หากคุณไม่พบเอกสารที่ต้องการ สามารถติดต่อทีมงานสนับสนุนของเราได้ทันที
           </p>
           <RouterLink
             to="/contact"
             class="inline-block px-6 py-3 bg-primary text-white rounded-lg font-bold hover:bg-blue-700 transition-colors"
           >
-            Contact Support
+            ติดต่อฝ่ายสนับสนุน
           </RouterLink>
         </div>
       </div>

@@ -2,9 +2,33 @@
 import { ArrowRight, CheckCircle, Shield, Truck, Users } from "lucide-vue-next";
 import { products, articles } from "../services/mockData";
 import { RouterLink } from "vue-router";
+import { onMounted, ref } from "vue";
+import ProductCard from "../components/ProductCard.vue";
 
 const featuredProducts = products.slice(0, 4);
 const latestArticles = articles.slice(0, 3);
+
+// Scroll Animation Logic
+const observer = ref<IntersectionObserver | null>(null);
+
+onMounted(() => {
+  observer.value = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("translate-y-0", "opacity-100");
+          entry.target.classList.remove("translate-y-10", "opacity-0");
+          observer.value?.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  document.querySelectorAll(".reveal").forEach((el) => {
+    observer.value?.observe(el);
+  });
+});
 </script>
 
 <template>
@@ -20,16 +44,22 @@ const latestArticles = articles.slice(0, 3);
       </div>
       <div class="container mx-auto px-4 relative z-10">
         <div class="max-w-3xl">
-          <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          <h1
+            class="text-4xl md:text-6xl font-bold mb-6 leading-tight reveal opacity-0 translate-y-10 transition-all duration-1000 ease-out"
+          >
             โซลูชั่นเคมีอุตสาหกรรม
             <span class="text-secondary">ระดับพรีเมียม</span>
           </h1>
-          <p class="text-xl text-gray-300 mb-8 max-w-2xl">
+          <p
+            class="text-xl text-gray-300 mb-8 max-w-2xl reveal opacity-0 translate-y-10 transition-all duration-1000 delay-200 ease-out"
+          >
             พันธมิตรที่คุณไว้วางใจสำหรับสารเคมีอุตสาหกรรมคุณภาพสูง
             เราจัดหาผลิตภัณฑ์ที่ได้รับการรับรอง ความเชี่ยวชาญทางเทคนิค
             และการจัดส่งที่เชื่อถือได้สำหรับความต้องการทางธุรกิจของคุณ
           </p>
-          <div class="flex flex-col sm:flex-row gap-4">
+          <div
+            class="flex flex-col sm:flex-row gap-4 reveal opacity-0 translate-y-10 transition-all duration-1000 delay-300 ease-out"
+          >
             <RouterLink
               to="/products"
               class="px-8 py-4 bg-primary hover:bg-blue-700 text-white rounded-lg font-bold text-lg transition-colors text-center"
@@ -52,7 +82,7 @@ const latestArticles = articles.slice(0, 3);
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div
-            class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow"
+            class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow reveal opacity-0 translate-y-10 transition-all duration-700 ease-out"
           >
             <div
               class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4"
@@ -65,7 +95,7 @@ const latestArticles = articles.slice(0, 3);
             </p>
           </div>
           <div
-            class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow"
+            class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow reveal opacity-0 translate-y-10 transition-all duration-700 delay-100 ease-out"
           >
             <div
               class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4"
@@ -78,7 +108,7 @@ const latestArticles = articles.slice(0, 3);
             </p>
           </div>
           <div
-            class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow"
+            class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow reveal opacity-0 translate-y-10 transition-all duration-700 delay-200 ease-out"
           >
             <div
               class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4"
@@ -91,7 +121,7 @@ const latestArticles = articles.slice(0, 3);
             </p>
           </div>
           <div
-            class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow"
+            class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow reveal opacity-0 translate-y-10 transition-all duration-700 delay-300 ease-out"
           >
             <div
               class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4"
@@ -126,44 +156,11 @@ const latestArticles = articles.slice(0, 3);
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div
+          <ProductCard
             v-for="product in featuredProducts"
             :key="product.id"
-            class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden group"
-          >
-            <div class="relative h-48 overflow-hidden">
-              <img
-                :src="product.image"
-                :alt="product.name"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div
-                class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary"
-              >
-                {{ product.category }}
-              </div>
-            </div>
-            <div class="p-6">
-              <h3
-                class="text-lg font-bold mb-2 group-hover:text-primary transition-colors"
-              >
-                {{ product.name }}
-              </h3>
-              <p class="text-gray-500 text-sm mb-4 line-clamp-2">
-                {{ product.description }}
-              </p>
-              <div class="flex items-center justify-between">
-                <span class="text-lg font-bold text-dark"
-                  >${{ product.price }}</span
-                >
-                <RouterLink
-                  :to="`/products/${product.id}`"
-                  class="text-sm font-medium text-primary hover:underline"
-                  >ดูรายละเอียด</RouterLink
-                >
-              </div>
-            </div>
-          </div>
+            :product="product"
+          />
         </div>
 
         <div class="mt-8 text-center md:hidden">

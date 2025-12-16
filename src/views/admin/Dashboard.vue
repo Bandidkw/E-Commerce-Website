@@ -11,7 +11,7 @@ import {
 const stats = ref([
   {
     title: "ยอดขายรวม",
-    value: "$12,450",
+    value: "฿435,750",
     icon: DollarSign,
     color: "text-green-500",
     bg: "bg-green-100",
@@ -42,50 +42,50 @@ const stats = ref([
 const recentOrders = ref([
   {
     id: 1001,
-    customer: "John Doe",
+    customer: "สมชาย ใจดี",
     date: "2024-03-15",
     total: 1250.0,
-    status: "Completed",
+    status: "เสร็จสมบูรณ์",
   },
   {
     id: 1002,
-    customer: "Jane Smith",
+    customer: "สมหญิง รักดี",
     date: "2024-03-14",
     total: 850.5,
-    status: "Processing",
+    status: "กำลังดำเนินการ",
   },
   {
     id: 1003,
-    customer: "Acme Corp",
+    customer: "บจก. เอซีมี",
     date: "2024-03-14",
     total: 5400.0,
-    status: "Shipped",
+    status: "จัดส่งแล้ว",
   },
   {
     id: 1004,
-    customer: "Tech Solutions",
+    customer: "เทค โซลูชั่นส์",
     date: "2024-03-13",
     total: 2100.0,
-    status: "Pending",
+    status: "รอดำเนินการ",
   },
   {
     id: 1005,
-    customer: "Global Traders",
+    customer: "โกลบอล เทรดเดอร์ส",
     date: "2024-03-12",
     total: 3200.0,
-    status: "Completed",
+    status: "เสร็จสมบูรณ์",
   },
 ]);
 
 const getStatusColor = (status: string) => {
   switch (status) {
-    case "Completed":
+    case "เสร็จสมบูรณ์":
       return "bg-green-100 text-green-700";
-    case "Processing":
+    case "กำลังดำเนินการ":
       return "bg-blue-100 text-blue-700";
-    case "Shipped":
+    case "จัดส่งแล้ว":
       return "bg-purple-100 text-purple-700";
-    case "Pending":
+    case "รอดำเนินการ":
       return "bg-yellow-100 text-yellow-700";
     default:
       return "bg-gray-100 text-gray-700";
@@ -155,7 +155,7 @@ const getStatusColor = (status: string) => {
               <td class="p-4 text-gray-600">{{ order.customer }}</td>
               <td class="p-4 text-gray-500">{{ order.date }}</td>
               <td class="p-4 font-bold text-dark">
-                ${{ order.total.toFixed(2) }}
+                ฿{{ order.total.toFixed(2) }}
               </td>
               <td class="p-4">
                 <span
