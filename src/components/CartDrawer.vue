@@ -24,7 +24,7 @@ const cartStore = useCartStore();
           </h2>
           <button
             @click="cartStore.toggleCart"
-            class="text-gray-400 hover:text-dark transition-colors"
+            class="text-gray-400 hover:text-dark transition-colors cursor-pointer"
           >
             <X class="w-6 h-6" />
           </button>
@@ -41,7 +41,7 @@ const cartStore = useCartStore();
             <p class="text-sm">ดูเหมือนว่าคุณยังไม่ได้เพิ่มสินค้าใดๆ</p>
             <button
               @click="cartStore.toggleCart"
-              class="mt-6 text-primary font-bold hover:underline"
+              class="mt-6 text-primary font-bold hover:underline cursor-pointer"
             >
               เริ่มช้อปปิ้ง
             </button>

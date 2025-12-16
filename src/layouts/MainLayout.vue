@@ -100,7 +100,7 @@ const toggleMenu = () => {
             <!-- Cart Button -->
             <button
               @click="cartStore.toggleCart"
-              class="relative text-gray-600 hover:text-primary transition-colors"
+              class="relative text-gray-600 hover:text-primary transition-colors cursor-pointer"
             >
               <ShoppingBag class="w-6 h-6" />
               <span
@@ -115,7 +115,7 @@ const toggleMenu = () => {
           <div class="flex items-center gap-4 md:hidden">
             <button
               @click="cartStore.toggleCart"
-              class="relative text-gray-600 hover:text-primary transition-colors"
+              class="relative text-gray-600 hover:text-primary transition-colors cursor-pointer"
             >
               <ShoppingBag class="w-6 h-6" />
               <span
