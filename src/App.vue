@@ -42,27 +42,44 @@ onUnmounted(() => {
 </template>
 
 <style>
+/* Enhanced Page Transitions */
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .page-enter-from {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(20px) scale(0.98);
 }
 
 .page-leave-to {
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-20px) scale(0.98);
 }
 
 /* Scroll Animation Utilities */
 .fade-up-enter-active {
-  transition: all 0.8s ease-out;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .fade-up-enter-from {
   opacity: 0;
   transform: translateY(30px);
+}
+
+/* Back to Top Button Animation */
+button.fixed {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button.fixed:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 25px -5px rgba(15, 76, 129, 0.4);
+}
+
+button.fixed:active {
+  transform: translateY(0) scale(0.98);
 }
 </style>

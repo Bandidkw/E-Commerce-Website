@@ -132,10 +132,10 @@ const setCategory = (category: string) => {
               v-for="page in totalPages"
               :key="page"
               @click="currentPage = page"
-              class="w-10 h-10 rounded-lg flex items-center justify-center font-medium transition-colors cursor-pointer"
+              class="w-10 h-10 rounded-lg flex items-center justify-center font-medium transition-all duration-300 cursor-pointer hover:scale-110"
               :class="
                 currentPage === page
-                  ? 'bg-primary text-white'
+                  ? 'bg-primary text-white shadow-md'
                   : 'bg-white text-gray-600 hover:bg-gray-100'
               "
             >

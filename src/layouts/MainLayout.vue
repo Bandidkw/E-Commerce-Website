@@ -139,49 +139,58 @@ const toggleMenu = () => {
       </div>
 
       <!-- Mobile Navigation -->
-      <div
-        v-if="isMenuOpen"
-        class="md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg"
+      <transition
+        enter-active-class="transition-all duration-300 ease-out"
+        leave-active-class="transition-all duration-200 ease-in"
+        enter-from-class="opacity-0 -translate-y-4"
+        enter-to-class="opacity-100 translate-y-0"
+        leave-from-class="opacity-100 translate-y-0"
+        leave-to-class="opacity-0 -translate-y-4"
       >
-        <div class="flex flex-col p-4 gap-4">
-          <RouterLink
-            to="/"
-            @click="isMenuOpen = false"
-            class="text-gray-600 hover:text-primary font-medium"
-            >หน้าแรก</RouterLink
-          >
-          <RouterLink
-            to="/about"
-            @click="isMenuOpen = false"
-            class="text-gray-600 hover:text-primary font-medium"
-            >เกี่ยวกับเรา</RouterLink
-          >
-          <RouterLink
-            to="/products"
-            @click="isMenuOpen = false"
-            class="text-gray-600 hover:text-primary font-medium"
-            >สินค้า</RouterLink
-          >
-          <RouterLink
-            to="/downloads"
-            @click="isMenuOpen = false"
-            class="text-gray-600 hover:text-primary font-medium"
-            >ดาวน์โหลด</RouterLink
-          >
-          <RouterLink
-            to="/blog"
-            @click="isMenuOpen = false"
-            class="text-gray-600 hover:text-primary font-medium"
-            >บทความ</RouterLink
-          >
-          <RouterLink
-            to="/contact"
-            @click="isMenuOpen = false"
-            class="px-5 py-2.5 bg-primary text-white rounded-lg text-center font-medium"
-            >ติดต่อเรา</RouterLink
-          >
+        <div
+          v-if="isMenuOpen"
+          class="md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg"
+        >
+          <div class="flex flex-col p-4 gap-4">
+            <RouterLink
+              to="/"
+              @click="isMenuOpen = false"
+              class="text-gray-600 hover:text-primary font-medium transition-colors duration-200"
+              >หน้าแรก</RouterLink
+            >
+            <RouterLink
+              to="/about"
+              @click="isMenuOpen = false"
+              class="text-gray-600 hover:text-primary font-medium transition-colors duration-200"
+              >เกี่ยวกับเรา</RouterLink
+            >
+            <RouterLink
+              to="/products"
+              @click="isMenuOpen = false"
+              class="text-gray-600 hover:text-primary font-medium transition-colors duration-200"
+              >สินค้า</RouterLink
+            >
+            <RouterLink
+              to="/downloads"
+              @click="isMenuOpen = false"
+              class="text-gray-600 hover:text-primary font-medium transition-colors duration-200"
+              >ดาวน์โหลด</RouterLink
+            >
+            <RouterLink
+              to="/blog"
+              @click="isMenuOpen = false"
+              class="text-gray-600 hover:text-primary font-medium transition-colors duration-200"
+              >บทความ</RouterLink
+            >
+            <RouterLink
+              to="/contact"
+              @click="isMenuOpen = false"
+              class="px-5 py-2.5 bg-primary text-white rounded-lg text-center font-medium transition-all duration-200 hover:bg-blue-700"
+              >ติดต่อเรา</RouterLink
+            >
+          </div>
         </div>
-      </div>
+      </transition>
     </header>
 
     <!-- Main Content -->

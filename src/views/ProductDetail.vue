@@ -81,18 +81,18 @@ const relatedProducts = computed(() => {
             <div class="flex flex-col sm:flex-row gap-4 mb-12">
               <RouterLink
                 to="/contact"
-                class="px-8 py-4 bg-primary hover:bg-blue-700 text-white rounded-lg font-bold text-center transition-colors"
+                class="px-8 py-4 bg-primary hover:bg-blue-700 text-white rounded-lg font-bold text-center transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
               >
                 ขอใบเสนอราคา
               </RouterLink>
               <button
                 @click="cartStore.addToCart(product)"
-                class="px-8 py-4 bg-dark hover:bg-gray-800 text-white rounded-lg font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                class="px-8 py-4 bg-dark hover:bg-gray-800 text-white rounded-lg font-bold transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer hover:-translate-y-0.5 hover:shadow-lg"
               >
                 <ShoppingBag class="w-5 h-5" /> เพิ่มลงตะกร้า
               </button>
               <button
-                class="px-8 py-4 bg-white border-2 border-gray-200 hover:border-primary hover:text-primary text-gray-700 rounded-lg font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                class="px-8 py-4 bg-white border-2 border-gray-200 hover:border-primary hover:text-primary text-gray-700 rounded-lg font-bold transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer hover:-translate-y-0.5 hover:shadow-md"
               >
                 <Download class="w-5 h-5" /> ดาวน์โหลด TDS
               </button>
@@ -151,7 +151,7 @@ const relatedProducts = computed(() => {
               v-for="related in relatedProducts"
               :key="related.id"
               :to="`/products/${related.id}`"
-              class="flex gap-4 bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow group"
+              class="flex gap-4 bg-white p-4 rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group hover:-translate-y-1"
             >
               <div
                 class="w-20 h-20 bg-gray-100 rounded-md overflow-hidden flex-shrink-0"
@@ -159,7 +159,7 @@ const relatedProducts = computed(() => {
                 <img
                   :src="related.image"
                   :alt="related.name"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
               <div>
