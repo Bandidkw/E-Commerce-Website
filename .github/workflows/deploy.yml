@@ -1,0 +1,41 @@
+name: Deploy Vue Project to GitHub Pages
+
+on:
+  push:
+    branches: [main] # รันเมื่อมีการ Push โค้ดไปยัง Branch main
+  workflow_dispatch: # อนุญาตให้รัน Workflow นี้ด้วยตนเองจากหน้า Actions
+
+permissions:
+  contents: read
+  pages: write # จำเป็นสำหรับการ Deploy
+  id-token: write # จำเป็นสำหรับการ Deploy
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # ใช้ Node.js เวอร์ชันที่คุณใช้ในโปรเจกต์
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Vue Project
+        run: npm run build # รัน Build Script ของคุณ (จะสร้างโฟลเดอร์ dist)
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4 # ตั้งค่าสภาพแวดล้อม Pages
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./dist" # อัปโหลดโฟลเดอร์ dist ที่ถูก Build แล้ว
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # สั่ง Deploy
