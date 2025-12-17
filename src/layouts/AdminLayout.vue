@@ -7,6 +7,7 @@ import {
   Settings,
   LogOut,
   Menu,
+  FileText,
 } from "lucide-vue-next";
 import { ref } from "vue";
 
@@ -27,6 +28,7 @@ const menuItems = [
   { name: "แดชบอร์ด", path: "/admin/dashboard", icon: LayoutDashboard },
   { name: "สินค้า", path: "/admin/products", icon: Package },
   { name: "คำสั่งซื้อ", path: "/admin/orders", icon: ShoppingCart },
+  { name: "ใบเสนอราคา", path: "/admin/quotations", icon: FileText },
   { name: "ตั้งค่า", path: "/admin/settings", icon: Settings },
 ];
 </script>

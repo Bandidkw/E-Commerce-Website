@@ -12,11 +12,13 @@ import {
 import { ref } from "vue";
 import { useCartStore } from "../stores/cart";
 import CartDrawer from "../components/CartDrawer.vue";
+import LoginModal from "../components/LoginModal.vue";
 
 const cartStore = useCartStore();
 const router = useRouter();
 const searchQuery = ref("");
 const isMenuOpen = ref(false);
+const loginModalRef = ref<InstanceType<typeof LoginModal>>();
 
 const handleSearch = () => {
   if (searchQuery.value.trim()) {
@@ -27,6 +29,10 @@ const handleSearch = () => {
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
+};
+
+const openLoginModal = () => {
+  loginModalRef.value?.openModal();
 };
 </script>
 
@@ -343,13 +349,17 @@ const toggleMenu = () => {
           <p>
             &copy; {{ new Date().getFullYear() }} ChemCorp. All rights reserved.
           </p>
-          <RouterLink to="/login" class="hover:text-gray-400 transition-colors"
-            >เข้าสู่ระบบแอดมิน</RouterLink
+          <button
+            @click="openLoginModal"
+            class="hover:text-gray-400 transition-colors cursor-pointer"
           >
+            เข้าสู่ระบบแอดมิน
+          </button>
         </div>
       </div>
     </footer>
 
     <CartDrawer />
+    <LoginModal ref="loginModalRef" />
   </div>
 </template>

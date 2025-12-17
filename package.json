@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.23",
     "@vueuse/head": "^2.0.0",
     "lucide-vue-next": "^0.561.0",
     "pinia": "^3.0.4",

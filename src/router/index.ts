@@ -97,6 +97,21 @@ const routes = [
         component: () => import("../views/admin/OrderList.vue"),
       },
       {
+        path: "quotations",
+        name: "AdminQuotations",
+        component: () => import("../views/admin/QuotationList.vue"),
+      },
+      {
+        path: "quotations/new",
+        name: "AdminQuotationCreate",
+        component: () => import("../views/admin/QuotationForm.vue"),
+      },
+      {
+        path: "quotations/:id",
+        name: "AdminQuotationEdit",
+        component: () => import("../views/admin/QuotationForm.vue"),
+      },
+      {
         path: "settings",
         name: "AdminSettings",
         component: () => import("../views/admin/Settings.vue"),
