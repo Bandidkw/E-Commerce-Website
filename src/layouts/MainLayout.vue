@@ -39,79 +39,82 @@ const openLoginModal = () => {
 <template>
   <div class="min-h-screen flex flex-col font-sans text-dark">
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-      <div class="container mx-auto px-4">
+    <header class="glass sticky top-0 z-50">
+      <div class="container mx-auto px-6">
         <div class="flex justify-between items-center h-20">
           <!-- Logo -->
           <RouterLink
             to="/"
-            class="text-2xl font-bold text-primary flex items-center gap-2"
+            class="text-2xl font-black text-slate-900 flex items-center gap-3 group"
           >
             <div
-              class="w-8 h-8 bg-primary rounded-md flex items-center justify-center text-white"
+              class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-indigo group-hover:scale-110 transition-transform duration-500"
             >
               C
             </div>
-            ChemCorp
+            <span
+              class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light"
+              >ChemCorp</span
+            >
           </RouterLink>
 
           <!-- Desktop Navigation -->
           <nav class="hidden md:flex items-center gap-8">
             <!-- Search Bar -->
-            <div class="relative hidden lg:block">
+            <div class="relative hidden lg:block group">
               <input
                 v-model="searchQuery"
                 @keyup.enter="handleSearch"
                 type="text"
                 placeholder="ค้นหาสินค้า..."
-                class="pl-10 pr-4 py-2 bg-gray-100 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 w-64 transition-all"
+                class="pl-11 pr-4 py-2.5 bg-slate-100/50 border border-transparent focus:border-primary/20 rounded-full text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 w-64 transition-all duration-300"
               />
               <Search
-                class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 cursor-pointer"
+                class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer group-hover:text-primary transition-colors"
                 @click="handleSearch"
               />
             </div>
 
             <RouterLink
               to="/"
-              class="text-gray-600 hover:text-primary font-medium transition-colors"
+              class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
               >หน้าแรก</RouterLink
             >
             <RouterLink
               to="/about"
-              class="text-gray-600 hover:text-primary font-medium transition-colors"
+              class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
               >เกี่ยวกับเรา</RouterLink
             >
             <RouterLink
               to="/products"
-              class="text-gray-600 hover:text-primary font-medium transition-colors"
+              class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
               >สินค้า</RouterLink
             >
             <RouterLink
               to="/downloads"
-              class="text-gray-600 hover:text-primary font-medium transition-colors"
+              class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
               >ดาวน์โหลด</RouterLink
             >
             <RouterLink
               to="/blog"
-              class="text-gray-600 hover:text-primary font-medium transition-colors"
+              class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
               >บทความ</RouterLink
             >
             <RouterLink
               to="/contact"
-              class="px-5 py-2.5 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              class="px-6 py-2.5 bg-primary text-white rounded-xl hover:bg-primary-dark transition-all duration-300 font-bold shadow-indigo hover:shadow-lg hover:-translate-y-0.5"
               >ติดต่อเรา</RouterLink
             >
 
             <!-- Cart Button -->
             <button
               @click="cartStore.toggleCart"
-              class="relative text-gray-600 hover:text-primary transition-colors cursor-pointer"
+              class="relative text-slate-600 hover:text-primary transition-smooth hover-lift cursor-pointer p-2 rounded-xl hover:bg-primary/5"
             >
               <ShoppingBag class="w-6 h-6" />
               <span
                 v-if="cartStore.itemCount > 0"
-                class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center"
+                class="absolute top-0 right-0 bg-accent text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center ring-2 ring-white"
               >
                 {{ cartStore.itemCount }}
               </span>
@@ -205,156 +208,241 @@ const openLoginModal = () => {
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white pt-16 pb-8">
-      <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+    <footer class="bg-slate-950 text-white pt-20 pb-10">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <!-- Company Info -->
           <div>
             <div
-              class="text-2xl font-bold text-white mb-4 flex items-center gap-2"
+              class="text-2xl font-black text-white mb-6 flex items-center gap-3"
             >
               <div
-                class="w-8 h-8 bg-primary rounded-md flex items-center justify-center text-white"
+                class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-indigo"
               >
                 C
               </div>
               ChemCorp
             </div>
-            <p class="text-gray-400 mb-6">
+            <p class="text-slate-400 mb-8 leading-relaxed">
               ผู้นำด้านการจัดจำหน่ายสารเคมีอุตสาหกรรมและโซลูชั่น
-              มุ่งมั่นในคุณภาพ ความปลอดภัย และนวัตกรรม
+              มุ่งมั่นในคุณภาพ ความปลอดภัย และนวัตกรรมเพื่ออนาคตที่ยั่งยืน
             </p>
             <div class="flex gap-4">
               <!-- Social Icons Placeholder -->
               <div
-                class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer"
+                class="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center hover:bg-primary transition-smooth hover-lift cursor-pointer group"
               >
-                F
+                <span
+                  class="font-bold group-hover:scale-110 transition-transform"
+                  >F</span
+                >
               </div>
               <div
-                class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer"
+                class="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center hover:bg-primary transition-smooth hover-lift cursor-pointer group"
               >
-                L
+                <span
+                  class="font-bold group-hover:scale-110 transition-transform"
+                  >L</span
+                >
               </div>
               <div
-                class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer"
+                class="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center hover:bg-primary transition-smooth hover-lift cursor-pointer group"
               >
-                Y
+                <span
+                  class="font-bold group-hover:scale-110 transition-transform"
+                  >X</span
+                >
               </div>
             </div>
           </div>
 
           <!-- Quick Links -->
           <div>
-            <h3 class="text-lg font-bold mb-6">ลิงก์ด่วน</h3>
-            <ul class="space-y-3">
+            <h3
+              class="text-base font-black text-white uppercase tracking-widest mb-8"
+            >
+              ลิงก์ด่วน
+            </h3>
+            <ul class="space-y-4">
               <li>
                 <RouterLink
                   to="/"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >หน้าแรก</RouterLink
+                  class="text-slate-400 hover:text-white transition-smooth flex items-center gap-2 group"
                 >
+                  <div
+                    class="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:w-3 transition-all"
+                  ></div>
+                  หน้าแรก
+                </RouterLink>
               </li>
               <li>
                 <RouterLink
                   to="/about"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >เกี่ยวกับเรา</RouterLink
+                  class="text-slate-400 hover:text-white transition-smooth flex items-center gap-2 group"
                 >
+                  <div
+                    class="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:w-3 transition-all"
+                  ></div>
+                  เกี่ยวกับเรา
+                </RouterLink>
               </li>
               <li>
                 <RouterLink
                   to="/products"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >สินค้า</RouterLink
+                  class="text-slate-400 hover:text-white transition-smooth flex items-center gap-2 group"
                 >
+                  <div
+                    class="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:w-3 transition-all"
+                  ></div>
+                  สินค้า
+                </RouterLink>
               </li>
               <li>
                 <RouterLink
                   to="/downloads"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >ดาวน์โหลด</RouterLink
+                  class="text-slate-400 hover:text-white transition-smooth flex items-center gap-2 group"
                 >
+                  <div
+                    class="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:w-3 transition-all"
+                  ></div>
+                  ดาวน์โหลด
+                </RouterLink>
               </li>
               <li>
                 <RouterLink
                   to="/blog"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >บทความ</RouterLink
+                  class="text-slate-400 hover:text-white transition-smooth flex items-center gap-2 group"
                 >
+                  <div
+                    class="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:w-3 transition-all"
+                  ></div>
+                  บทความ
+                </RouterLink>
               </li>
             </ul>
           </div>
 
           <!-- Products -->
           <div>
-            <h3 class="text-lg font-bold mb-6">สินค้า</h3>
-            <ul class="space-y-3">
+            <h3
+              class="text-base font-black text-white uppercase tracking-widest mb-8"
+            >
+              สินค้า
+            </h3>
+            <ul class="space-y-4">
               <li>
                 <RouterLink
                   to="/products"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >การบำบัดน้ำ</RouterLink
+                  class="text-slate-400 hover:text-white transition-smooth flex items-center gap-2 group"
                 >
+                  <div
+                    class="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:w-3 transition-all"
+                  ></div>
+                  การบำบัดน้ำ
+                </RouterLink>
               </li>
               <li>
                 <RouterLink
                   to="/products"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >ตัวทำละลายอุตสาหกรรม</RouterLink
+                  class="text-slate-400 hover:text-white transition-smooth flex items-center gap-2 group"
                 >
+                  <div
+                    class="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:w-3 transition-all"
+                  ></div>
+                  ตัวทำละลายอุตสาหกรรม
+                </RouterLink>
               </li>
               <li>
                 <RouterLink
                   to="/products"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >สารเจือปนอาหาร</RouterLink
+                  class="text-slate-400 hover:text-white transition-smooth flex items-center gap-2 group"
                 >
+                  <div
+                    class="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:w-3 transition-all"
+                  ></div>
+                  สารเจือปนอาหาร
+                </RouterLink>
               </li>
               <li>
                 <RouterLink
                   to="/products"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >เคมีสิ่งทอ</RouterLink
+                  class="text-slate-400 hover:text-white transition-smooth flex items-center gap-2 group"
                 >
+                  <div
+                    class="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:w-3 transition-all"
+                  ></div>
+                  เคมีสิ่งทอ
+                </RouterLink>
               </li>
             </ul>
           </div>
 
           <!-- Contact Info -->
           <div>
-            <h3 class="text-lg font-bold mb-6">ติดต่อเรา</h3>
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3">
-                <MapPin class="w-5 h-5 text-primary mt-1" />
-                <span class="text-gray-400"
+            <h3
+              class="text-base font-black text-white uppercase tracking-widest mb-8"
+            >
+              ติดต่อเรา
+            </h3>
+            <ul class="space-y-6">
+              <li class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center shrink-0"
+                >
+                  <MapPin class="w-5 h-5 text-primary" />
+                </div>
+                <span class="text-slate-400 text-sm leading-relaxed"
                   >123 นิคมอุตสาหกรรม บางนา กรุงเทพฯ 10260 ประเทศไทย</span
                 >
               </li>
-              <li class="flex items-center gap-3">
-                <Phone class="w-5 h-5 text-primary" />
-                <span class="text-gray-400">+66 2 123 4567</span>
+              <li class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center shrink-0"
+                >
+                  <Phone class="w-5 h-5 text-primary" />
+                </div>
+                <span class="text-slate-400 text-sm">+66 2 123 4567</span>
               </li>
-              <li class="flex items-center gap-3">
-                <Mail class="w-5 h-5 text-primary" />
-                <span class="text-gray-400">sales@chemcorp.com</span>
+              <li class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center shrink-0"
+                >
+                  <Mail class="w-5 h-5 text-primary" />
+                </div>
+                <span
+                  class="text-slate-400 text-sm font-medium hover:text-white transition-colors cursor-pointer"
+                  >sales@chemcorp.com</span
+                >
               </li>
             </ul>
           </div>
         </div>
 
         <div
-          class="border-t border-gray-700 pt-8 text-center text-gray-500 text-sm flex flex-col md:flex-row justify-between items-center gap-4"
+          class="border-t border-slate-800/50 pt-10 text-slate-500 text-sm flex flex-col md:flex-row justify-between items-center gap-6"
         >
-          <p>
-            &copy; {{ new Date().getFullYear() }} ChemCorp. All rights reserved.
+          <p class="font-medium">
+            &copy; {{ new Date().getFullYear() }}
+            <span class="text-slate-300">ChemCorp.</span> All rights reserved.
           </p>
-          <button
-            @click="openLoginModal"
-            class="hover:text-gray-400 transition-colors cursor-pointer"
-          >
-            เข้าสู่ระบบแอดมิน
-          </button>
+          <div class="flex items-center gap-8">
+            <button
+              @click="openLoginModal"
+              class="hover:text-primary transition-smooth cursor-pointer font-bold px-4 py-2 rounded-lg hover:bg-primary/5"
+            >
+              แอดมินลัด
+            </button>
+            <div class="flex gap-6 font-medium">
+              <span
+                class="hover:text-slate-300 transition-colors cursor-pointer"
+                >Privacy Policy</span
+              >
+              <span
+                class="hover:text-slate-300 transition-colors cursor-pointer"
+                >Terms of Service</span
+              >
+            </div>
+          </div>
         </div>
       </div>
     </footer>

@@ -114,20 +114,24 @@ const handleSave = () => {
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogPanel
-              class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all w-full max-w-2xl flex flex-col"
+              class="relative transform overflow-hidden rounded-[2.5rem] bg-white text-left shadow-premium-lg transition-all w-full max-w-2xl max-h-[90vh] flex flex-col border border-slate-100"
             >
               <!-- Header -->
-              <div class="bg-white px-6 py-4 border-b border-gray-200">
+              <div class="bg-slate-50/50 px-10 py-8 border-b border-slate-100">
                 <div class="flex items-center justify-between">
                   <DialogTitle
-                    class="text-xl font-bold text-gray-900 flex items-center gap-2"
+                    class="text-2xl font-black text-slate-900 flex items-center gap-4"
                   >
-                    <Package class="w-6 h-6 text-primary" />
+                    <div
+                      class="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-white shadow-indigo"
+                    >
+                      <Package class="w-6 h-6" />
+                    </div>
                     {{ isEditing ? "แก้ไขข้อมูลสินค้า" : "เพิ่มสินค้าใหม่" }}
                   </DialogTitle>
                   <button
                     type="button"
-                    class="text-gray-400 hover:text-gray-500 transition-colors cursor-pointer"
+                    class="p-3 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-2xl transition-all cursor-pointer"
                     @click="emit('close')"
                   >
                     <X class="h-6 w-6" />
@@ -137,32 +141,33 @@ const handleSave = () => {
 
               <!-- Form Content -->
               <div class="flex-1 overflow-y-auto px-6 py-6">
-                <form @submit.prevent="handleSave" class="space-y-6">
+                <form @submit.prevent="handleSave" class="space-y-8">
                   <!-- Name -->
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1"
+                    <label
+                      class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1"
                       >ชื่อสินค้า</label
                     >
                     <input
                       v-model="form.name"
                       type="text"
                       required
-                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all text-sm"
+                      class="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-primary/5 focus:border-primary/20 outline-none font-bold text-slate-700 transition-all"
                       placeholder="กรอกชื่อสินค้า"
                     />
                   </div>
 
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Category -->
                     <div>
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-1"
+                        class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1"
                         >หมวดหมู่</label
                       >
                       <select
                         v-model="form.category"
                         required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none bg-white text-sm"
+                        class="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-primary/5 focus:border-primary/20 outline-none font-bold text-slate-700 bg-white transition-all appearance-none cursor-pointer"
                       >
                         <option value="" disabled>เลือกหมวดหมู่</option>
                         <option
@@ -178,7 +183,7 @@ const handleSave = () => {
                     <!-- Price -->
                     <div>
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-1"
+                        class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1"
                         >ราคา (บาท)</label
                       >
                       <input
@@ -187,7 +192,7 @@ const handleSave = () => {
                         step="0.01"
                         min="0"
                         required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-sm"
+                        class="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-primary/5 focus:border-primary/20 outline-none font-bold text-slate-700 transition-all"
                       />
                     </div>
                   </div>
@@ -244,33 +249,34 @@ const handleSave = () => {
 
                   <!-- Description -->
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1"
+                    <label
+                      class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1"
                       >รายละเอียดสินค้า</label
                     >
                     <textarea
                       v-model="form.description"
-                      rows="3"
+                      rows="4"
                       required
-                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none resize-none text-sm"
-                      placeholder="กรอกรายละเอียดสินค้า..."
+                      class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-primary/5 focus:border-primary/20 outline-none resize-none font-bold text-slate-600 transition-all placeholder:text-slate-400"
+                      placeholder="อธิบายคุณสมบัติและสเปกของสินค้า..."
                     ></textarea>
                   </div>
 
                   <!-- Footer Actions -->
-                  <div class="flex justify-end gap-3 pt-4">
+                  <div class="flex justify-end gap-4 pt-4">
                     <button
                       type="button"
                       @click="emit('close')"
-                      class="px-5 py-2.5 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium cursor-pointer"
+                      class="px-8 py-3.5 bg-white border border-slate-200 text-slate-600 rounded-2xl hover:bg-slate-50 transition-all font-black cursor-pointer"
                     >
                       ยกเลิก
                     </button>
                     <button
                       type="submit"
-                      class="px-5 py-2.5 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center gap-2 cursor-pointer"
+                      class="px-8 py-3.5 bg-primary text-white rounded-2xl hover:bg-primary-dark transition-all font-black flex items-center gap-3 cursor-pointer shadow-indigo hover:shadow-lg hover:-translate-y-1"
                     >
-                      <Save class="w-4 h-4" />
-                      บันทึกข้อมูล
+                      <Save class="w-5 h-5" />
+                      บันทึกข้อมูลสินค้า
                     </button>
                   </div>
                 </form>

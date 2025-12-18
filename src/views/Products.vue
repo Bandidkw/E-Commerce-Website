@@ -50,43 +50,74 @@ const setCategory = (category: string) => {
 </script>
 
 <template>
-  <div class="bg-gray-50 min-h-screen py-12">
-    <div class="container mx-auto px-4">
-      <h1 class="text-3xl font-bold mb-8">สินค้าของเรา</h1>
+  <div class="bg-slate-50 min-h-screen py-16">
+    <div class="container mx-auto px-6">
+      <div class="mb-12">
+        <h1 class="text-4xl md:text-5xl font-black text-slate-900 mb-4">
+          สินค้า <span class="text-primary">ทั้งหมด</span>
+        </h1>
+        <p class="text-slate-500 text-lg">
+          รายการเคมีภัณฑ์อุตสาหกรรมที่คัดสรรมาเพื่อคุณภาพที่เหนือกว่า
+        </p>
+      </div>
 
       <div class="flex flex-col lg:flex-row gap-8">
         <!-- Sidebar Filters -->
         <div class="lg:w-1/4">
-          <div class="bg-white p-6 rounded-xl shadow-sm sticky top-24">
-            <div class="flex items-center gap-2 mb-6">
-              <Filter class="w-5 h-5 text-primary" />
-              <h2 class="text-lg font-bold">หมวดหมู่</h2>
+          <div
+            class="bg-white p-8 rounded-[2rem] shadow-premium border border-slate-100 sticky top-24"
+          >
+            <div class="flex items-center gap-3 mb-8">
+              <div
+                class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center"
+              >
+                <Filter class="w-5 h-5 text-primary" />
+              </div>
+              <h2 class="text-xl font-black text-slate-900">ตัวกรอง</h2>
+            </div>
+
+            <div
+              class="mb-4 text-xs font-black text-slate-400 uppercase tracking-widest"
+            >
+              หมวดหมู่สินค้า
             </div>
             <ul class="space-y-2">
               <li>
                 <button
                   @click="setCategory('All')"
-                  class="w-full text-left px-4 py-2 rounded-lg transition-colors cursor-pointer"
+                  class="w-full text-left px-5 py-3 rounded-2xl transition-all duration-300 cursor-pointer font-bold"
                   :class="
                     selectedCategory === 'All'
-                      ? 'bg-primary text-white'
-                      : 'hover:bg-gray-100 text-gray-600'
+                      ? 'bg-primary text-white shadow-indigo translate-x-1'
+                      : 'hover:bg-slate-50 text-slate-600 hover:text-primary'
                   "
                 >
-                  สินค้าทั้งหมด
+                  <span class="flex items-center justify-between">
+                    สินค้าทั้งหมด
+                    <span
+                      v-if="selectedCategory === 'All'"
+                      class="w-1.5 h-6 bg-white/30 rounded-full"
+                    ></span>
+                  </span>
                 </button>
               </li>
               <li v-for="category in categories" :key="category">
                 <button
                   @click="setCategory(category)"
-                  class="w-full text-left px-4 py-2 rounded-lg transition-colors cursor-pointer"
+                  class="w-full text-left px-5 py-3 rounded-2xl transition-all duration-300 cursor-pointer font-bold"
                   :class="
                     selectedCategory === category
-                      ? 'bg-primary text-white'
-                      : 'hover:bg-gray-100 text-gray-600'
+                      ? 'bg-primary text-white shadow-indigo translate-x-1'
+                      : 'hover:bg-slate-50 text-slate-600 hover:text-primary'
                   "
                 >
-                  {{ category }}
+                  <span class="flex items-center justify-between">
+                    {{ category }}
+                    <span
+                      v-if="selectedCategory === category"
+                      class="w-1.5 h-6 bg-white/30 rounded-full"
+                    ></span>
+                  </span>
                 </button>
               </li>
             </ul>
@@ -97,14 +128,14 @@ const setCategory = (category: string) => {
         <div class="lg:w-3/4">
           <!-- Search Bar -->
           <div
-            class="bg-white p-4 rounded-xl shadow-sm mb-8 flex items-center gap-4"
+            class="bg-white p-2 pl-6 rounded-2xl shadow-premium border border-slate-100 mb-10 flex items-center gap-4 focus-within:ring-4 focus-within:ring-primary/5 focus-within:border-primary/20 transition-all duration-300"
           >
-            <Search class="w-5 h-5 text-gray-400" />
+            <Search class="w-6 h-6 text-slate-400" />
             <input
               v-model="searchQuery"
               type="text"
-              placeholder="ค้นหาสินค้า..."
-              class="flex-grow outline-none text-gray-600"
+              placeholder="ค้นหาสินค้าที่คุณต้องการ..."
+              class="flex-grow py-4 outline-none text-slate-600 font-medium placeholder:text-slate-400"
             />
           </div>
 
@@ -127,16 +158,16 @@ const setCategory = (category: string) => {
           </div>
 
           <!-- Pagination -->
-          <div v-if="totalPages > 1" class="flex justify-center mt-12 gap-2">
+          <div v-if="totalPages > 1" class="flex justify-center mt-16 gap-3">
             <button
               v-for="page in totalPages"
               :key="page"
               @click="currentPage = page"
-              class="w-10 h-10 rounded-lg flex items-center justify-center font-medium transition-all duration-300 cursor-pointer hover:scale-110"
+              class="w-12 h-12 rounded-2xl flex items-center justify-center font-black transition-all duration-300 cursor-pointer hover:-translate-y-1"
               :class="
                 currentPage === page
-                  ? 'bg-primary text-white shadow-md'
-                  : 'bg-white text-gray-600 hover:bg-gray-100'
+                  ? 'bg-primary text-white shadow-indigo'
+                  : 'bg-white text-slate-600 border border-slate-100 hover:bg-slate-50'
               "
             >
               {{ page }}

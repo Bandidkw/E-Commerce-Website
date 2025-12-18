@@ -34,41 +34,65 @@ onMounted(() => {
 <template>
   <div>
     <!-- Hero Section -->
-    <section class="relative bg-dark text-white py-24 lg:py-32 overflow-hidden">
+    <section
+      class="relative bg-slate-950 text-white py-32 lg:py-48 overflow-hidden"
+    >
+      <!-- Background Mesh Gradient -->
       <div class="absolute inset-0 z-0">
+        <div
+          class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px] animate-pulse"
+        ></div>
+        <div
+          class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent/20 rounded-full blur-[120px] animate-pulse delay-700"
+        ></div>
         <img
           src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
           alt="Laboratory"
           class="w-full h-full object-cover opacity-20"
         />
       </div>
-      <div class="container mx-auto px-4 relative z-10">
-        <div class="max-w-3xl">
-          <h1
-            class="text-4xl md:text-6xl font-bold mb-6 leading-tight reveal opacity-0 translate-y-10 transition-all duration-1000 ease-out"
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl">
+          <div
+            class="flex items-center gap-2 mb-8 reveal opacity-0 translate-y-10 transition-all duration-1000 ease-out"
           >
-            โซลูชั่นเคมีอุตสาหกรรม
-            <span class="text-secondary">ระดับพรีเมียม</span>
+            <span
+              class="px-4 py-1.5 bg-primary/10 border border-primary/20 text-primary-light rounded-full text-xs font-black uppercase tracking-widest"
+              >Premium Quality</span
+            >
+            <span class="w-12 h-px bg-slate-800"></span>
+            <span
+              class="text-slate-400 text-xs font-bold uppercase tracking-widest"
+              >Direct Manufacturer</span
+            >
+          </div>
+
+          <h1
+            class="text-5xl md:text-8xl font-black mb-8 leading-[1.05] reveal opacity-0 translate-y-10 transition-all duration-1000 delay-100 ease-out"
+          >
+            โซลูชั่นเคมี
+            <span class="text-gradient">ระดับพรีเมียม</span>
           </h1>
           <p
-            class="text-xl text-gray-300 mb-8 max-w-2xl reveal opacity-0 translate-y-10 transition-all duration-1000 delay-200 ease-out"
+            class="text-xl md:text-2xl text-slate-400 mb-12 max-w-2xl leading-relaxed reveal opacity-0 translate-y-10 transition-all duration-1000 delay-200 ease-out"
           >
             พันธมิตรที่คุณไว้วางใจสำหรับสารเคมีอุตสาหกรรมคุณภาพสูง
             เราจัดหาผลิตภัณฑ์ที่ได้รับการรับรอง ความเชี่ยวชาญทางเทคนิค
-            และการจัดส่งที่เชื่อถือได้สำหรับความต้องการทางธุรกิจของคุณ
+            และการจัดส่งที่เชื่อถือได้ทั่วประเทศ
           </p>
           <div
-            class="flex flex-col sm:flex-row gap-4 reveal opacity-0 translate-y-10 transition-all duration-1000 delay-300 ease-out"
+            class="flex flex-col sm:flex-row gap-6 reveal opacity-0 translate-y-10 transition-all duration-1000 delay-300 ease-out"
           >
             <RouterLink
               to="/products"
-              class="px-8 py-4 bg-primary hover:bg-blue-700 text-white rounded-lg font-bold text-lg transition-colors text-center"
+              class="px-10 py-5 bg-primary hover:bg-primary-dark text-white rounded-2xl font-black text-lg transition-all shadow-indigo hover:shadow-lg hover:-translate-y-1 text-center"
             >
               ดูสินค้าทั้งหมด
             </RouterLink>
             <RouterLink
               to="/contact"
-              class="px-8 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-dark text-white rounded-lg font-bold text-lg transition-colors text-center"
+              class="px-10 py-5 bg-slate-900/50 backdrop-blur-md border border-slate-800 hover:border-primary/50 text-white rounded-2xl font-black text-lg transition-all hover:bg-slate-800 text-center"
             >
               ขอใบเสนอราคา
             </RouterLink>
@@ -78,59 +102,65 @@ onMounted(() => {
     </section>
 
     <!-- USP Section -->
-    <section class="py-16 bg-white">
-      <div class="container mx-auto px-4">
+    <section class="py-24 bg-white relative">
+      <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div
-            class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow reveal opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            class="p-8 bg-slate-50/50 rounded-3xl border border-slate-100 hover:border-primary/20 hover:bg-white hover:shadow-premium transition-all duration-500 reveal opacity-0 translate-y-10 ease-out"
           >
             <div
-              class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"
             >
-              <CheckCircle class="w-6 h-6 text-primary" />
+              <CheckCircle class="w-7 h-7 text-primary" />
             </div>
-            <h3 class="text-xl font-bold mb-2">สินค้าพร้อมส่ง</h3>
-            <p class="text-gray-600">
-              คลังสินค้าขนาดใหญ่พร้อมจัดส่งทันทีเพื่อรองรับการดำเนินงานของคุณ
+            <h3 class="text-2xl font-black mb-3 text-slate-900">
+              สินค้าพร้อมส่ง
+            </h3>
+            <p class="text-slate-600 leading-relaxed">
+              คลังสินค้าขนาดใหญ่พร้อมจัดส่งทันทีเพื่อรองรับการดำเนินงานของคุณอย่างไม่มีสะดุด
             </p>
           </div>
           <div
-            class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow reveal opacity-0 translate-y-10 transition-all duration-700 delay-100 ease-out"
+            class="p-8 bg-slate-50/50 rounded-3xl border border-slate-100 hover:border-primary/20 hover:bg-white hover:shadow-premium transition-all duration-500 reveal opacity-0 translate-y-10 delay-100 ease-out"
           >
             <div
-              class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"
             >
-              <Truck class="w-6 h-6 text-primary" />
+              <Truck class="w-7 h-7 text-primary" />
             </div>
-            <h3 class="text-xl font-bold mb-2">จัดส่งรวดเร็ว</h3>
-            <p class="text-gray-600">
-              เครือข่ายโลจิสติกส์ที่มีประสิทธิภาพรับประกันการจัดส่งทันเวลาทั่วประเทศ
+            <h3 class="text-2xl font-black mb-3 text-slate-900">
+              จัดส่งรวดเร็ว
+            </h3>
+            <p class="text-slate-600 leading-relaxed">
+              เครือข่ายโลจิสติกส์ที่มีประสิทธิภาพรับประกันการจัดส่งทันเวลาทั่วทั้งภูมิภาค
             </p>
           </div>
           <div
-            class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow reveal opacity-0 translate-y-10 transition-all duration-700 delay-200 ease-out"
+            class="p-8 bg-slate-50/50 rounded-3xl border border-slate-100 hover:border-primary/20 hover:bg-white hover:shadow-premium transition-all duration-500 reveal opacity-0 translate-y-10 delay-200 ease-out"
           >
             <div
-              class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"
             >
-              <Users class="w-6 h-6 text-primary" />
+              <Users class="w-7 h-7 text-primary" />
             </div>
-            <h3 class="text-xl font-bold mb-2">บริการสนับสนุนทางเทคนิค</h3>
-            <p class="text-gray-600">
-              ทีมผู้เชี่ยวชาญพร้อมให้คำปรึกษาทางเทคนิคและแนวทางแก้ไขปัญหา
+            <h3 class="text-2xl font-black mb-3 text-slate-900">
+              ผู้เชี่ยวชาญ
+            </h3>
+            <p class="text-slate-600 leading-relaxed">
+              ทีมที่ปรึกษาทางเทคนิคพร้อมให้คำแนะนำและโซลูชั่นที่ตรงจุดสำหรับอุตสาหกรรมของคุณ
             </p>
           </div>
           <div
-            class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow reveal opacity-0 translate-y-10 transition-all duration-700 delay-300 ease-out"
+            class="p-8 bg-slate-50/50 rounded-3xl border border-slate-100 hover:border-primary/20 hover:bg-white hover:shadow-premium transition-all duration-500 reveal opacity-0 translate-y-10 delay-300 ease-out"
           >
             <div
-              class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"
             >
-              <Shield class="w-6 h-6 text-primary" />
+              <Shield class="w-7 h-7 text-primary" />
             </div>
-            <h3 class="text-xl font-bold mb-2">คุณภาพที่ได้รับการรับรอง</h3>
-            <p class="text-gray-600">
-              ผลิตภัณฑ์ทุกชิ้นมีใบรับรอง COA/MSDS และได้มาตรฐานสากล
+            <h3 class="text-2xl font-black mb-3 text-slate-900">มาตรฐานสากล</h3>
+            <p class="text-slate-600 leading-relaxed">
+              ผลิตภัณฑ์ทุกชิ้นได้รับการตรวจสอบคุณภาพและมีใบรับระดับการันตีความปลอดภัย
             </p>
           </div>
         </div>
@@ -138,94 +168,126 @@ onMounted(() => {
     </section>
 
     <!-- Featured Products -->
-    <section class="py-20 bg-gray-50">
-      <div class="container mx-auto px-4">
-        <div class="flex justify-between items-end mb-12">
-          <div>
-            <h2 class="text-3xl font-bold mb-2">สินค้าแนะนำ</h2>
-            <p class="text-gray-600">
-              ค้นพบโซลูชั่นอุตสาหกรรมที่ขายดีที่สุดของเรา
+    <section class="py-32 bg-slate-50">
+      <div class="container mx-auto px-6">
+        <div
+          class="flex flex-col md:flex-row justify-between items-end gap-6 mb-16"
+        >
+          <div class="max-w-2xl">
+            <h2
+              class="text-4xl md:text-5xl font-black mb-6 text-slate-900 leading-tight"
+            >
+              สินค้าแนะนำ <span class="text-primary">ยอดนิยม</span>
+            </h2>
+            <p class="text-slate-600 text-lg">
+              ค้นพบโซลูชั่นเคมีอุตสาหกรรมที่ขายดีที่สุดและเป็นที่นิยมของเรา
+              ซึ่งได้รับการยอมรับจากทั่วทุกมุมโลก
             </p>
           </div>
           <RouterLink
             to="/products"
-            class="hidden md:flex items-center text-primary font-medium hover:underline"
+            class="group flex items-center gap-2 text-primary font-black hover:text-primary-dark transition-colors"
           >
-            ดูสินค้าทั้งหมด <ArrowRight class="w-4 h-4 ml-1" />
+            ดูสินค้าทั้งหมด
+            <div
+              class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300"
+            >
+              <ArrowRight class="w-5 h-5" />
+            </div>
           </RouterLink>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           <ProductCard
             v-for="product in featuredProducts"
             :key="product.id"
             :product="product"
           />
         </div>
-
-        <div class="mt-8 text-center md:hidden">
-          <RouterLink
-            to="/products"
-            class="inline-flex items-center text-primary font-medium hover:underline"
-          >
-            ดูสินค้าทั้งหมด <ArrowRight class="w-4 h-4 ml-1" />
-          </RouterLink>
-        </div>
       </div>
     </section>
 
     <!-- Call to Action -->
-    <section class="py-20 bg-primary text-white text-center">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">
-          ต้องการโซลูชั่นเฉพาะทาง?
+    <section class="py-24 relative overflow-hidden">
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-primary to-primary-dark z-0"
+      ></div>
+      <div
+        class="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] z-0"
+      ></div>
+
+      <div class="container mx-auto px-6 relative z-10 text-center">
+        <h2
+          class="text-4xl md:text-6xl font-black mb-8 text-white leading-tight"
+        >
+          ต้องการโซลูชั่นเคมี
+          <span class="text-primary-light italic">เฉพาะทาง?</span>
         </h2>
-        <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-          ทีมผู้เชี่ยวชาญของเราพร้อมช่วยคุณค้นหาโซลูชั่นเคมีที่สมบูรณ์แบบสำหรับความต้องการเฉพาะของคุณ
+        <p
+          class="text-xl text-white/80 mb-12 max-w-2xl mx-auto leading-relaxed"
+        >
+          ทีมวิศวกรและผู้เชี่ยวชาญของเราพร้อมสนับสนุนคุณในการค้นพบโซลูชั่นเคมีที่สมบูรณ์แบบสำหรับความต้องการเฉพาะทางในธุรกิจของคุณ
         </p>
         <RouterLink
           to="/contact"
-          class="inline-block px-8 py-4 bg-white text-primary rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors"
+          class="inline-flex items-center gap-3 px-10 py-5 bg-white text-primary rounded-2xl font-black text-xl hover:bg-slate-50 transition-all shadow-xl hover:-translate-y-1"
         >
-          ติดต่อผู้เชี่ยวชาญของเรา
+          ติดต่อผู้เชี่ยวชาญ <ArrowRight class="w-6 h-6" />
         </RouterLink>
       </div>
     </section>
 
     <!-- Latest Articles -->
-    <section class="py-20 bg-white">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-12 text-center">
-          ข้อมูลเชิงลึกในอุตสาหกรรม
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section class="py-32 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-20">
+          <h2 class="text-4xl md:text-5xl font-black mb-6 text-slate-900">
+            ข้อมูลเชิงลึกในอุตสาหกรรม
+          </h2>
+          <p class="text-slate-600 text-lg">
+            ติดตามความเคลื่อนไหวและเทคโนโลยีล่าสุดในวงการเคมีอุตสาหกรรม
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div
             v-for="article in latestArticles"
             :key="article.id"
-            class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow"
+            class="group bg-white rounded-3xl border border-slate-100 overflow-hidden hover:shadow-premium-lg transition-all duration-500 hover:-translate-y-2"
           >
-            <div class="h-48 overflow-hidden">
+            <div class="h-64 overflow-hidden relative">
               <img
                 :src="article.image"
                 :alt="article.title"
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
+              <div class="absolute top-4 left-4">
+                <span
+                  class="px-3 py-1 bg-white/90 backdrop-blur-md rounded-lg text-xs font-black text-primary uppercase"
+                  >Insight</span
+                >
+              </div>
             </div>
-            <div class="p-6">
-              <div class="text-sm text-gray-500 mb-2">{{ article.date }}</div>
+            <div class="p-8">
+              <div
+                class="text-sm font-bold text-slate-400 mb-4 flex items-center gap-2"
+              >
+                <span class="w-8 h-px bg-slate-200"></span>
+                {{ article.date }}
+              </div>
               <h3
-                class="text-xl font-bold mb-3 hover:text-primary transition-colors"
+                class="text-2xl font-black mb-4 group-hover:text-primary transition-colors leading-tight"
               >
                 <RouterLink to="/blog">{{ article.title }}</RouterLink>
               </h3>
-              <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+              <p class="text-slate-600 mb-6 line-clamp-2 leading-relaxed">
                 {{ article.excerpt }}
               </p>
               <RouterLink
                 to="/blog"
-                class="text-primary font-medium hover:underline text-sm"
-                >อ่านเพิ่มเติม</RouterLink
-              >
+                class="inline-flex items-center gap-2 text-primary font-black hover:gap-3 transition-all"
+                >อ่านเพิ่มเติม <ArrowRight class="w-4 h-4" />
+              </RouterLink>
             </div>
           </div>
         </div>

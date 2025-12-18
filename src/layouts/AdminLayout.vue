@@ -41,47 +41,50 @@ const menuItems = [
   <div class="min-h-screen bg-gray-100 flex">
     <!-- Sidebar -->
     <aside
-      class="bg-dark text-white transition-all duration-300 flex flex-col fixed inset-y-0 left-0 z-20 md:relative"
-      :class="isSidebarOpen ? 'w-64' : 'w-0 md:w-20 overflow-hidden'"
+      class="bg-slate-900 border-r border-slate-800 text-slate-300 transition-all duration-300 flex flex-col fixed inset-y-0 left-0 z-20 md:relative"
+      :class="isSidebarOpen ? 'w-72' : 'w-0 md:w-20 overflow-hidden'"
     >
       <div
-        class="p-6 flex items-center justify-between h-20 border-b border-gray-700"
+        class="p-6 flex items-center justify-between h-20 border-b border-slate-800/50"
       >
         <div
-          class="flex items-center gap-2 font-bold text-xl truncate"
+          class="flex items-center gap-3 font-black text-xl text-white truncate"
           v-if="isSidebarOpen"
         >
           <div
-            class="w-8 h-8 bg-primary rounded-md flex items-center justify-center text-white flex-shrink-0"
+            class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-indigo shrink-0"
           >
             C
           </div>
-          ChemAdmin
+          Admin <span class="text-primary-light">Hub</span>
         </div>
         <div v-else class="mx-auto">
           <div
-            class="w-8 h-8 bg-primary rounded-md flex items-center justify-center text-white"
+            class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-indigo"
           >
             C
           </div>
         </div>
       </div>
 
-      <nav class="flex-1 py-6 px-3 space-y-2">
+      <nav class="flex-1 py-8 px-4 space-y-2 overflow-y-auto">
         <RouterLink
           v-for="item in menuItems"
           :key="item.path"
           :to="item.path"
-          class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors"
+          class="flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-300 group"
           :class="
             route.path.startsWith(item.path)
-              ? 'bg-primary text-white'
-              : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+              ? 'bg-primary text-white shadow-indigo scale-[1.02]'
+              : 'text-slate-400 hover:bg-slate-800 hover:text-white'
           "
         >
-          <component :is="item.icon" class="w-5 h-5 flex-shrink-0" />
+          <component
+            :is="item.icon"
+            class="w-5 h-5 flex-shrink-0 transition-transform group-hover:scale-110"
+          />
           <span
-            class="whitespace-nowrap transition-opacity duration-300"
+            class="whitespace-nowrap font-bold transition-all duration-300"
             :class="isSidebarOpen ? 'opacity-100' : 'opacity-0 md:hidden'"
           >
             {{ item.name }}
@@ -89,36 +92,45 @@ const menuItems = [
         </RouterLink>
       </nav>
 
-      <div class="p-4 border-t border-gray-700">
+      <div class="p-4 border-t border-slate-800/50">
         <button
           @click="handleLogout"
-          class="flex items-center gap-3 px-4 py-3 w-full text-left text-red-400 hover:bg-gray-800 rounded-lg transition-colors cursor-pointer"
+          class="flex items-center gap-4 px-4 py-4 w-full text-left text-rose-400 hover:bg-rose-950/30 hover:text-rose-300 rounded-xl transition-all duration-300 cursor-pointer font-bold group"
         >
-          <LogOut class="w-5 h-5" />
+          <LogOut
+            class="w-5 h-5 transition-transform group-hover:-translate-x-1"
+          />
           <span v-if="isSidebarOpen">ออกจากระบบ</span>
         </button>
       </div>
     </aside>
 
     <!-- Main Content -->
-    <div class="flex-1 flex flex-col min-w-0">
+    <div class="flex-1 flex flex-col min-w-0 bg-slate-50">
       <!-- Header -->
       <header
-        class="bg-white shadow-sm h-20 flex items-center justify-between px-8 sticky top-0 z-10"
+        class="glass h-20 flex items-center justify-between px-8 sticky top-0 z-10"
       >
-        <button @click="toggleSidebar" class="text-gray-500 hover:text-dark">
+        <button
+          @click="toggleSidebar"
+          class="p-2 hover:bg-slate-100 rounded-xl transition-colors text-slate-500 hover:text-primary cursor-pointer"
+        >
           <Menu class="w-6 h-6" />
         </button>
 
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-6">
           <div class="text-right hidden sm:block">
-            <p class="font-bold text-sm text-gray-900">ผู้ดูแลระบบ</p>
-            <p class="text-xs text-gray-500">admin@chemcorp.com</p>
+            <p class="font-black text-sm text-slate-900 leading-none mb-1">
+              Super Admin
+            </p>
+            <p class="text-xs text-slate-500 font-medium tracking-tight">
+              admin@chemcorp.com
+            </p>
           </div>
           <div
-            class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold"
+            class="w-11 h-11 bg-gradient-to-br from-primary to-primary-light rounded-2xl flex items-center justify-center text-white font-black shadow-indigo transform hover:rotate-3 transition-transform cursor-pointer"
           >
-            A
+            S
           </div>
         </div>
       </header>
