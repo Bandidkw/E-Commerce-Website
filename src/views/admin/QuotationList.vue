@@ -10,11 +10,9 @@ import {
   Trash2,
   Plus,
   Send,
-  CheckCircle,
-  XCircle,
-  FileEdit,
 } from "lucide-vue-next";
 import QuotationModal from "../../components/QuotationModal.vue";
+import StatusBadge from "../../components/common/StatusBadge.vue";
 
 const quotationModalRef = ref<InstanceType<typeof QuotationModal>>();
 
@@ -124,29 +122,6 @@ const filteredQuotations = computed(() => {
     return matchesSearch && matchesStatus;
   });
 });
-
-const statusConfig = {
-  draft: {
-    label: "ร่าง",
-    class: "bg-gray-100 text-gray-800",
-    icon: FileEdit,
-  },
-  sent: {
-    label: "ส่งแล้ว",
-    class: "bg-blue-100 text-blue-800",
-    icon: Send,
-  },
-  approved: {
-    label: "อนุมัติ",
-    class: "bg-green-100 text-green-800",
-    icon: CheckCircle,
-  },
-  rejected: {
-    label: "ปฏิเสธ",
-    class: "bg-red-100 text-red-800",
-    icon: XCircle,
-  },
-};
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
@@ -394,18 +369,7 @@ const sendQuotation = (id: string) => {
 
               <!-- Status -->
               <td class="px-6 py-4 whitespace-nowrap text-center">
-                <span
-                  :class="[
-                    'inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium',
-                    statusConfig[quotation.status].class,
-                  ]"
-                >
-                  <component
-                    :is="statusConfig[quotation.status].icon"
-                    class="w-3.5 h-3.5"
-                  />
-                  {{ statusConfig[quotation.status].label }}
-                </span>
+                <StatusBadge :status="quotation.status" />
               </td>
 
               <!-- Valid Until -->

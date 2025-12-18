@@ -20,7 +20,7 @@ const toggleSidebar = () => {
 };
 
 const handleLogout = () => {
-  // In a real app, you would clear the auth token here
+  localStorage.removeItem("admin_token");
   router.push("/");
 };
 

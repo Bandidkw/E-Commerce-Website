@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
+import type { Product } from "./products";
 
 export interface CartItem {
   id: number;
@@ -29,7 +30,7 @@ export const useCartStore = defineStore("cart", () => {
     isOpen.value = !isOpen.value;
   };
 
-  const addToCart = (product: any) => {
+  const addToCart = (product: Product) => {
     const existingItem = items.value.find((item) => item.id === product.id);
     if (existingItem) {
       existingItem.quantity++;

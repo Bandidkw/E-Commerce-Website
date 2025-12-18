@@ -44,6 +44,7 @@ const handleLogin = async () => {
 
   if (username.value === "admin" && password.value === "123456") {
     // Mock success
+    localStorage.setItem("admin_token", "true");
     closeModal();
     router.push("/admin/dashboard");
   } else {

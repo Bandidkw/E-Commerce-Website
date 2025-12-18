@@ -18,6 +18,7 @@ const handleLogin = async () => {
 
   if (username.value === "admin" && password.value === "123456") {
     // Mock success
+    localStorage.setItem("admin_token", "true");
     router.push("/admin/dashboard");
   } else {
     error.value = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";

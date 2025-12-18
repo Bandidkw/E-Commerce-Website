@@ -117,6 +117,7 @@ const routes = [
         component: () => import("../views/admin/Settings.vue"),
       },
     ],
+    meta: { requiresAuth: true },
   },
 ];
 
@@ -130,6 +131,19 @@ const router = createRouter({
       return { top: 0 };
     }
   },
+});
+
+router.beforeEach((to, _from, next) => {
+  const isAdminRoute = to.matched.some((record) => record.meta.requiresAuth);
+  const isAuthenticated = localStorage.getItem("admin_token") === "true";
+
+  if (isAdminRoute && !isAuthenticated) {
+    next({ name: "Login" });
+  } else if (to.name === "Login" && isAuthenticated) {
+    next({ name: "AdminDashboard" });
+  } else {
+    next();
+  }
 });
 
 export default router;
