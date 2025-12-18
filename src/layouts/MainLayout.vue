@@ -8,6 +8,7 @@ import {
   MapPin,
   ShoppingBag,
   Search,
+  User,
 } from "lucide-vue-next";
 import { ref } from "vue";
 import { useCartStore } from "../stores/cart";
@@ -119,6 +120,15 @@ const openLoginModal = () => {
                 {{ cartStore.itemCount }}
               </span>
             </button>
+
+            <!-- Admin Login Button (Desktop) -->
+            <button
+              @click="openLoginModal"
+              class="text-slate-600 hover:text-primary transition-smooth hover-lift cursor-pointer p-2 rounded-xl hover:bg-primary/5"
+              title="เข้าสู่ระบบแอดมิน"
+            >
+              <User class="w-6 h-6" />
+            </button>
           </nav>
 
           <div class="flex items-center gap-4 md:hidden">
@@ -133,6 +143,14 @@ const openLoginModal = () => {
               >
                 {{ cartStore.itemCount }}
               </span>
+            </button>
+
+            <!-- Admin Login Button (Mobile Header) -->
+            <button
+              @click="openLoginModal"
+              class="text-gray-600 hover:text-primary transition-colors cursor-pointer"
+            >
+              <User class="w-6 h-6" />
             </button>
 
             <!-- Mobile Menu Button -->
@@ -426,12 +444,6 @@ const openLoginModal = () => {
             <span class="text-slate-300">ChemCorp.</span> All rights reserved.
           </p>
           <div class="flex items-center gap-8">
-            <button
-              @click="openLoginModal"
-              class="hover:text-primary transition-smooth cursor-pointer font-bold px-4 py-2 rounded-lg hover:bg-primary/5"
-            >
-              แอดมินลัด
-            </button>
             <div class="flex gap-6 font-medium">
               <span
                 class="hover:text-slate-300 transition-colors cursor-pointer"
