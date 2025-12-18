@@ -50,7 +50,7 @@ const config = computed(() => {
 
 <template>
   <div
-    class="flex items-center gap-3 p-4 rounded-xl shadow-2xl border pointer-events-auto min-w-[300px] max-w-md transform transition-all duration-300"
+    class="flex items-center gap-3 p-4 rounded-xl shadow-2xl border pointer-events-auto min-w-[300px] max-w-md"
     :class="[config.bg, config.text, config.border]"
   >
     <component :is="config.icon" class="w-6 h-6 shrink-0" />
