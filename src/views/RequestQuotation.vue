@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useCartStore } from "../stores/cart";
+import { useToastStore } from "../stores/toast";
 import { CheckCircle, FileText } from "lucide-vue-next";
 
 const cartStore = useCartStore();
+const toast = useToastStore();
 
 const form = ref({
   email: "",
@@ -32,6 +34,7 @@ const submitQuote = async () => {
 
   isProcessing.value = false;
   isSuccess.value = true;
+  toast.success("ส่งคำขอใบเสนอราคาเรียบร้อยแล้ว");
 
   // Clear cart after short delay
   setTimeout(() => {

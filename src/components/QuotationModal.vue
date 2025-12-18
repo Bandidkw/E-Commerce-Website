@@ -8,6 +8,9 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
+import { useToastStore } from "../stores/toast";
+
+const toast = useToastStore();
 
 interface QuotationItem {
   productName: string;
@@ -36,10 +39,26 @@ const generateQuotationNumber = () => {
   return `QT-${year}-${random}`;
 };
 
-const openModal = () => {
+const isEdit = ref(false);
+
+const openModal = (data?: any) => {
   isOpen.value = true;
-  resetForm();
-  quotationNumber.value = generateQuotationNumber();
+  if (data) {
+    isEdit.value = true;
+    quotationNumber.value = data.quotationNumber;
+    customerName.value = data.customerName;
+    customerEmail.value = data.customerEmail;
+    customerPhone.value = data.customerPhone;
+    customerCompany.value = data.customerCompany;
+    validUntil.value = data.validUntil;
+    notes.value = data.notes;
+    discount.value = data.discount;
+    items.value = JSON.parse(JSON.stringify(data.items)); // Deep copy to avoid direct mutation
+  } else {
+    isEdit.value = false;
+    resetForm();
+    quotationNumber.value = generateQuotationNumber();
+  }
 };
 
 const closeModal = () => {
@@ -95,13 +114,13 @@ const formatPrice = (price: number) => {
 };
 
 const saveAsDraft = () => {
-  alert("บันทึกเป็นร่างเรียบร้อยแล้ว");
+  toast.success("บันทึกเป็นร่างเรียบร้อยแล้ว");
   closeModal();
 };
 
 const sendQuotation = () => {
   if (!customerName.value || !customerEmail.value || !validUntil.value) {
-    alert("กรุณากรอกข้อมูลลูกค้าให้ครบถ้วน");
+    toast.error("กรุณากรอกข้อมูลลูกค้าให้ครบถ้วน");
     return;
   }
 
@@ -110,11 +129,11 @@ const sendQuotation = () => {
   );
 
   if (hasEmptyItems) {
-    alert("กรุณากรอกข้อมูลสินค้าให้ครบถ้วน");
+    toast.error("กรุณากรอกข้อมูลสินค้าให้ครบถ้วน");
     return;
   }
 
-  alert("ส่งใบเสนอราคาเรียบร้อยแล้ว");
+  toast.success("ส่งใบเสนอราคาเรียบร้อยแล้ว");
   closeModal();
 };
 
@@ -163,7 +182,7 @@ defineExpose({
                     class="text-2xl font-bold text-gray-900 flex items-center gap-3"
                   >
                     <FileText class="w-7 h-7 text-primary" />
-                    สร้างใบเสนอราคาใหม่
+                    {{ isEdit ? "แก้ไขใบเสนอราคา" : "สร้างใบเสนอราคาใหม่" }}
                   </DialogTitle>
                   <button
                     type="button"

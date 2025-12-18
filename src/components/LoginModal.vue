@@ -9,8 +9,10 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
+import { useToastStore } from "../stores/toast";
 
 const router = useRouter();
+const toast = useToastStore();
 const isOpen = ref(false);
 const username = ref("");
 const password = ref("");
@@ -45,10 +47,12 @@ const handleLogin = async () => {
   if (username.value === "admin" && password.value === "123456") {
     // Mock success
     localStorage.setItem("admin_token", "true");
+    toast.success("เข้าสู่ระบบสำเร็จ");
     closeModal();
     router.push("/admin/dashboard");
   } else {
     error.value = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
+    toast.error("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
   }
   isLoading.value = false;
 };

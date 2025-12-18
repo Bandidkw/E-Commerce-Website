@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { MapPin, Phone, Mail, Send } from "lucide-vue-next";
+import { useToastStore } from "../stores/toast";
+
+const toast = useToastStore();
 
 const form = ref({
   name: "",
@@ -19,6 +22,7 @@ const submitForm = () => {
   setTimeout(() => {
     isSubmitting.value = false;
     isSuccess.value = true;
+    toast.success("ส่งข้อความเรียบร้อยแล้ว! เราจะติดต่อกลับหาคุณเร็วๆ นี้");
     form.value = { name: "", email: "", phone: "", subject: "", message: "" };
     setTimeout(() => (isSuccess.value = false), 5000);
   }, 1500);

@@ -2,6 +2,7 @@
 import { RouterView } from "vue-router";
 import { ref, onMounted, onUnmounted } from "vue";
 import { ArrowUp } from "lucide-vue-next";
+import ToastProvider from "./components/common/ToastProvider.vue";
 
 const showBackToTop = ref(false);
 
@@ -28,6 +29,9 @@ onUnmounted(() => {
       <component :is="Component" />
     </transition>
   </router-view>
+
+  <!-- Global Toasts -->
+  <ToastProvider />
 
   <!-- Back to Top Button -->
   <button

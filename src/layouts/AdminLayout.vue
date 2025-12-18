@@ -10,6 +10,9 @@ import {
   FileText,
 } from "lucide-vue-next";
 import { ref } from "vue";
+import { useToastStore } from "../stores/toast";
+
+const toast = useToastStore();
 
 const router = useRouter();
 const route = useRoute();
@@ -21,6 +24,7 @@ const toggleSidebar = () => {
 
 const handleLogout = () => {
   localStorage.removeItem("admin_token");
+  toast.success("ออกจากระบบเรียบร้อยแล้ว");
   router.push("/");
 };
 

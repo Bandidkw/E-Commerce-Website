@@ -9,12 +9,32 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-vue-next";
-import { RouterLink } from "vue-router";
+import ProductModal from "../../components/admin/ProductModal.vue";
+import type { Product } from "../../stores/products";
+import ConfirmModal from "../../components/common/ConfirmModal.vue";
+import { useToastStore } from "../../stores/toast";
 
 const productStore = useProductStore();
 const searchQuery = ref("");
 const currentPage = ref(1);
 const itemsPerPage = 10;
+
+const isModalOpen = ref(false);
+const selectedProduct = ref<Product | null>(null);
+
+const isConfirmOpen = ref(false);
+const productToDelete = ref<number | null>(null);
+const toast = useToastStore();
+
+const openAddModal = () => {
+  selectedProduct.value = null;
+  isModalOpen.value = true;
+};
+
+const openEditModal = (product: Product) => {
+  selectedProduct.value = { ...product };
+  isModalOpen.value = true;
+};
 
 const filteredProducts = computed(() => {
   return productStore.products.filter(
@@ -51,8 +71,16 @@ watch(searchQuery, () => {
 });
 
 const deleteProduct = (id: number) => {
-  if (confirm("คุณแน่ใจหรือไม่ว่าต้องการลบสินค้านี้?")) {
-    productStore.deleteProduct(id);
+  productToDelete.value = id;
+  isConfirmOpen.value = true;
+};
+
+const confirmDelete = () => {
+  if (productToDelete.value !== null) {
+    productStore.deleteProduct(productToDelete.value);
+    toast.success("ลบสินค้าเรียบร้อยแล้ว");
+    isConfirmOpen.value = false;
+    productToDelete.value = null;
   }
 };
 </script>
@@ -61,13 +89,13 @@ const deleteProduct = (id: number) => {
   <div>
     <div class="flex justify-between items-center mb-8">
       <h1 class="text-2xl font-bold">สินค้า</h1>
-      <RouterLink
-        to="/admin/products/new"
-        class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
+      <button
+        @click="openAddModal"
+        class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors cursor-pointer"
       >
         <Plus class="w-5 h-5" />
         เพิ่มสินค้า
-      </RouterLink>
+      </button>
     </div>
 
     <div class="bg-white rounded-xl shadow-sm overflow-hidden">
@@ -118,12 +146,12 @@ const deleteProduct = (id: number) => {
               <td class="p-4 font-bold text-dark">฿{{ product.price }}</td>
               <td class="p-4 text-right">
                 <div class="flex items-center justify-end gap-2">
-                  <RouterLink
-                    :to="`/admin/products/${product.id}`"
-                    class="p-2 text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
+                  <button
+                    @click="openEditModal(product)"
+                    class="p-2 text-blue-500 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
                   >
                     <Edit class="w-4 h-4" />
-                  </RouterLink>
+                  </button>
                   <button
                     @click="deleteProduct(product.id)"
                     class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
@@ -173,5 +201,22 @@ const deleteProduct = (id: number) => {
         </div>
       </div>
     </div>
+    <!-- Product Modal -->
+    <ProductModal
+      :is-open="isModalOpen"
+      :product="selectedProduct"
+      @close="isModalOpen = false"
+    />
+
+    <!-- Confirm Modal -->
+    <ConfirmModal
+      :is-open="isConfirmOpen"
+      title="ยืนยันการลบสินค้า"
+      message="คุณแน่ใจหรือไม่ว่าต้องการลบสินค้านี้? การดำเนินการนี้ไม่สามารถย้อนกลับได้"
+      confirm-label="ลบสินค้า"
+      type="danger"
+      @close="isConfirmOpen = false"
+      @confirm="confirmDelete"
+    />
   </div>
 </template>

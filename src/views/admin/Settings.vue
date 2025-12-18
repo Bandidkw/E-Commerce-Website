@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { User, Lock, Globe, Bell, Save } from "lucide-vue-next";
+import { useToastStore } from "../../stores/toast";
+
+const toast = useToastStore();
 
 const activeTab = ref("profile");
 
@@ -30,16 +33,16 @@ const notificationForm = ref({
 
 const saveProfile = () => {
   // Mock save
-  alert("บันทึกข้อมูลส่วนตัวเรียบร้อยแล้ว");
+  toast.success("บันทึกข้อมูลส่วนตัวเรียบร้อยแล้ว");
 };
 
 const updatePassword = () => {
   if (passwordForm.value.newPassword !== passwordForm.value.confirmPassword) {
-    alert("รหัสผ่านใหม่ไม่ตรงกัน");
+    toast.error("รหัสผ่านใหม่ไม่ตรงกัน");
     return;
   }
   // Mock update
-  alert("เปลี่ยนรหัสผ่านเรียบร้อยแล้ว");
+  toast.success("เปลี่ยนรหัสผ่านเรียบร้อยแล้ว");
   passwordForm.value = {
     currentPassword: "",
     newPassword: "",
@@ -49,12 +52,12 @@ const updatePassword = () => {
 
 const saveSiteSettings = () => {
   // Mock save
-  alert("บันทึกการตั้งค่าเว็บไซต์เรียบร้อยแล้ว");
+  toast.success("บันทึกการตั้งค่าเว็บไซต์เรียบร้อยแล้ว");
 };
 
 const saveNotifications = () => {
   // Mock save
-  alert("บันทึกการตั้งค่าการแจ้งเตือนเรียบร้อยแล้ว");
+  toast.success("บันทึกการตั้งค่าการแจ้งเตือนเรียบร้อยแล้ว");
 };
 </script>
 

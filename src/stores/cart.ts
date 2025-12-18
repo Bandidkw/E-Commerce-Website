@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import type { Product } from "./products";
+import { useToastStore } from "./toast";
 
 export interface CartItem {
   id: number;
@@ -14,6 +15,7 @@ export interface CartItem {
 export const useCartStore = defineStore("cart", () => {
   const items = ref<CartItem[]>([]);
   const isOpen = ref(false);
+  const toast = useToastStore();
 
   const cartTotal = computed(() => {
     return items.value.reduce(
@@ -44,13 +46,17 @@ export const useCartStore = defineStore("cart", () => {
         quantity: 1,
       });
     }
+    toast.success(`เพิ่ม ${product.name} ลงในรถเข็นแล้ว`);
     isOpen.value = true;
   };
 
   const removeFromCart = (id: number) => {
+    const item = items.value.find((item) => item.id === id);
     const index = items.value.findIndex((item) => item.id === id);
     if (index > -1) {
+      const name = item?.name;
       items.value.splice(index, 1);
+      toast.info(`ลบ ${name} ออกจากรถเข็นแล้ว`);
     }
   };
 
@@ -66,6 +72,7 @@ export const useCartStore = defineStore("cart", () => {
 
   const clearCart = () => {
     items.value = [];
+    toast.info("ล้างรถเข็นเรียบร้อยแล้ว");
   };
 
   return {

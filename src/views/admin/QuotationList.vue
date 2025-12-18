@@ -10,11 +10,16 @@ import {
   Trash2,
   Plus,
   Send,
+  CheckCircle,
+  FileEdit,
 } from "lucide-vue-next";
 import QuotationModal from "../../components/QuotationModal.vue";
 import StatusBadge from "../../components/common/StatusBadge.vue";
+import ConfirmModal from "../../components/common/ConfirmModal.vue";
+import { useToastStore } from "../../stores/toast";
 
 const quotationModalRef = ref<InstanceType<typeof QuotationModal>>();
+const toast = useToastStore();
 
 interface QuotationItem {
   productName: string;
@@ -107,6 +112,9 @@ const quotations = ref<Quotation[]>([
 const searchQuery = ref("");
 const filterStatus = ref<string>("all");
 
+const isConfirmOpen = ref(false);
+const quotationToDelete = ref<string | null>(null);
+
 const filteredQuotations = computed(() => {
   return quotations.value.filter((q) => {
     const matchesSearch =
@@ -143,17 +151,29 @@ const createNewQuotation = () => {
   quotationModalRef.value?.openModal();
 };
 
-const editQuotation = (_id: string) => {
-  // For now, just open the modal - can be enhanced to load existing data
-  quotationModalRef.value?.openModal();
+const editQuotation = (id: string) => {
+  const quotation = quotations.value.find((q) => q.id === id);
+  if (quotation) {
+    quotationModalRef.value?.openModal(quotation);
+  }
 };
 
 const deleteQuotation = (id: string) => {
-  if (confirm("คุณต้องการลบใบเสนอราคานี้ใช่หรือไม่?")) {
-    const index = quotations.value.findIndex((q) => q.id === id);
+  quotationToDelete.value = id;
+  isConfirmOpen.value = true;
+};
+
+const confirmDeleteQuotation = () => {
+  if (quotationToDelete.value) {
+    const index = quotations.value.findIndex(
+      (q) => q.id === quotationToDelete.value
+    );
     if (index > -1) {
       quotations.value.splice(index, 1);
+      toast.success("ลบใบเสนอราคาเรียบร้อยแล้ว");
     }
+    isConfirmOpen.value = false;
+    quotationToDelete.value = null;
   }
 };
 
@@ -162,7 +182,7 @@ const sendQuotation = (id: string) => {
   if (quotation && quotation.status === "draft") {
     quotation.status = "sent";
     quotation.sentAt = new Date().toISOString();
-    alert("ส่งใบเสนอราคาเรียบร้อยแล้ว");
+    toast.success("ส่งใบเสนอราคาเรียบร้อยแล้ว");
   }
 };
 </script>
@@ -436,5 +456,16 @@ const sendQuotation = (id: string) => {
 
     <!-- Quotation Modal -->
     <QuotationModal ref="quotationModalRef" />
+
+    <!-- Confirm Modal -->
+    <ConfirmModal
+      :is-open="isConfirmOpen"
+      title="ยืนยันการลบใบเสนอราคา"
+      message="คุณต้องการลบใบเสนอราคานี้ใช่หรือไม่? การดำเนินการนี้ไม่สามารถย้อนกลับได้"
+      confirm-label="ลบใบเสนอราคา"
+      type="danger"
+      @close="isConfirmOpen = false"
+      @confirm="confirmDeleteQuotation"
+    />
   </div>
 </template>

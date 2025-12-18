@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-vue-next";
+import StatusBadge from "../../components/common/StatusBadge.vue";
 
 // Mock Orders
 const orders = ref([
@@ -95,21 +96,6 @@ const prevPage = () => {
 watch([searchQuery, statusFilter], () => {
   currentPage.value = 1;
 });
-
-const getStatusColor = (status: string) => {
-  switch (status) {
-    case "เสร็จสมบูรณ์":
-      return "bg-green-100 text-green-700";
-    case "กำลังดำเนินการ":
-      return "bg-blue-100 text-blue-700";
-    case "จัดส่งแล้ว":
-      return "bg-purple-100 text-purple-700";
-    case "รอดำเนินการ":
-      return "bg-yellow-100 text-yellow-700";
-    default:
-      return "bg-gray-100 text-gray-700";
-  }
-};
 </script>
 
 <template>
@@ -172,13 +158,7 @@ const getStatusColor = (status: string) => {
                 ฿{{ order.total.toFixed(2) }}
               </td>
               <td class="p-4">
-                <span
-                  :class="`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(
-                    order.status
-                  )}`"
-                >
-                  {{ order.status }}
-                </span>
+                <StatusBadge :status="order.status" type="order" />
               </td>
               <td class="p-4 text-right">
                 <button

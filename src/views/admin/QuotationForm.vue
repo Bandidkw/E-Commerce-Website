@@ -3,9 +3,11 @@ import { ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { FileText, Save, Send, ArrowLeft } from "lucide-vue-next";
 import QuotationItemsTable from "../../components/admin/QuotationItemsTable.vue";
+import { useToastStore } from "../../stores/toast";
 
 const router = useRouter();
 const route = useRoute();
+const toast = useToastStore();
 
 const isEditMode = computed(() => !!route.params.id);
 
@@ -69,14 +71,14 @@ const formatPrice = (price: number) => {
 
 const saveAsDraft = () => {
   // Save logic here
-  alert("บันทึกเป็นร่างเรียบร้อยแล้ว");
+  toast.success("บันทึกเป็นร่างเรียบร้อยแล้ว");
   router.push("/admin/quotations");
 };
 
 const sendQuotation = () => {
   // Validation
   if (!customerName.value || !customerEmail.value || !validUntil.value) {
-    alert("กรุณากรอกข้อมูลลูกค้าให้ครบถ้วน");
+    toast.error("กรุณากรอกข้อมูลลูกค้าให้ครบถ้วน");
     return;
   }
 
@@ -85,12 +87,12 @@ const sendQuotation = () => {
   );
 
   if (hasEmptyItems) {
-    alert("กรุณากรอกข้อมูลสินค้าให้ครบถ้วน");
+    toast.error("กรุณากรอกข้อมูลสินค้าให้ครบถ้วน");
     return;
   }
 
   // Send logic here
-  alert("ส่งใบเสนอราคาเรียบร้อยแล้ว");
+  toast.success("ส่งใบเสนอราคาเรียบร้อยแล้ว");
   router.push("/admin/quotations");
 };
 

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useCartStore } from "../stores/cart";
-
+import { useToastStore } from "../stores/toast";
 import { CheckCircle } from "lucide-vue-next";
 
 const cartStore = useCartStore();
+const toast = useToastStore();
 
 const form = ref({
   email: "",
@@ -31,6 +32,7 @@ const placeOrder = async () => {
 
   isProcessing.value = false;
   isSuccess.value = true;
+  toast.success("สั่งซื้อสินค้าเรียบร้อยแล้ว");
 
   // Clear cart after short delay
   setTimeout(() => {
