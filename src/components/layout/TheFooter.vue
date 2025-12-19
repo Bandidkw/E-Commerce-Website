@@ -236,7 +236,7 @@ defineEmits<{
             @click="$emit('open-login')"
             class="text-slate-500 hover:text-primary transition-colors text-xs font-bold uppercase tracking-widest cursor-pointer"
           >
-            ระบบจัดการ (Admin)
+            เข้าสู่ระบบ (Admin)
           </button>
         </div>
       </div>
