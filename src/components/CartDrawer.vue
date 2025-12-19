@@ -175,7 +175,7 @@ const cartStore = useCartStore();
                                     <button
                                       type="button"
                                       @click="cartStore.removeFromCart(item.id)"
-                                      class="font-medium text-primary hover:text-blue-700 transition-colors duration-200"
+                                      class="font-medium text-primary hover:text-blue-700 transition-colors duration-200 cursor-pointer"
                                     >
                                       ลบ
                                     </button>
@@ -231,7 +231,7 @@ const cartStore = useCartStore();
                         <button
                           type="button"
                           @click="cartStore.toggleCart"
-                          class="font-medium text-primary hover:text-blue-700 transition-colors duration-200"
+                          class="font-medium text-primary hover:text-blue-700 transition-colors duration-200 cursor-pointer"
                         >
                           ช้อปต่อ
                           <span aria-hidden="true"> &rarr;</span>

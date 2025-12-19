@@ -1,6 +1,22 @@
 <script setup lang="ts">
 import { RouterLink, useRouter } from "vue-router";
-import { Menu, X, ShoppingBag, Search } from "lucide-vue-next";
+import {
+  Menu as HeadlessMenu,
+  MenuButton,
+  MenuItems,
+  MenuItem,
+  TransitionRoot,
+} from "@headlessui/vue";
+import {
+  Menu as MenuIcon,
+  X,
+  ShoppingBag,
+  Search,
+  User,
+  LogOut,
+  ChevronDown,
+  Package,
+} from "lucide-vue-next";
 import { ref } from "vue";
 import { useCartStore } from "../../stores/cart";
 import { useAuthStore } from "../../stores/auth";
@@ -43,7 +59,7 @@ const toggleMenu = () => {
         <!-- Logo -->
         <RouterLink
           to="/"
-          class="text-2xl font-black text-slate-900 flex items-center gap-3 group"
+          class="text-2xl font-black text-slate-900 flex items-center gap-3 group cursor-pointer"
         >
           <div
             class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-indigo group-hover:scale-110 transition-transform duration-500"
@@ -75,32 +91,32 @@ const toggleMenu = () => {
 
           <RouterLink
             to="/"
-            class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
+            class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full cursor-pointer"
             >หน้าแรก</RouterLink
           >
           <RouterLink
             to="/about"
-            class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
+            class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full cursor-pointer"
             >เกี่ยวกับเรา</RouterLink
           >
           <RouterLink
             to="/products"
-            class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
+            class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full cursor-pointer"
             >สินค้า</RouterLink
           >
           <RouterLink
             to="/downloads"
-            class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
+            class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full cursor-pointer"
             >ดาวน์โหลด</RouterLink
           >
           <RouterLink
             to="/blog"
-            class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
+            class="text-slate-600 hover:text-primary font-semibold transition-smooth relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full cursor-pointer"
             >บทความ</RouterLink
           >
           <RouterLink
             to="/contact"
-            class="px-6 py-2.5 bg-primary text-white rounded-xl hover:bg-primary-dark transition-all duration-300 font-bold shadow-indigo hover:shadow-lg hover:-translate-y-0.5"
+            class="px-6 py-2.5 bg-primary text-white rounded-xl hover:bg-primary-dark transition-all duration-300 font-bold shadow-indigo hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
             >ติดต่อเรา</RouterLink
           >
 
@@ -118,13 +134,12 @@ const toggleMenu = () => {
             </span>
           </button>
 
-          <!-- User Profile / Login -->
+          <!-- User Profile Dropdown -->
           <div class="flex items-center gap-2">
             <template v-if="authStore.isLoggedIn">
-              <div class="flex items-center gap-3">
-                <RouterLink
-                  to="/profile"
-                  class="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-primary/10 text-slate-700 hover:text-primary rounded-xl transition-all duration-300 font-bold group"
+              <HeadlessMenu as="div" class="relative">
+                <MenuButton
+                  class="flex items-center gap-3 px-4 py-2 bg-slate-100 hover:bg-primary/10 text-slate-700 hover:text-primary rounded-xl transition-all duration-300 font-bold group outline-none cursor-pointer"
                 >
                   <div
                     class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white text-xs shadow-indigo group-hover:rotate-12 transition-transform"
@@ -134,16 +149,71 @@ const toggleMenu = () => {
                   <span class="max-w-[100px] truncate">{{
                     authStore.user?.name
                   }}</span>
-                </RouterLink>
+                  <ChevronDown
+                    class="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors"
+                  />
+                </MenuButton>
 
-                <button
-                  @click="handleLogout"
-                  class="p-2 text-slate-400 hover:text-rose-500 transition-colors cursor-pointer"
-                  title="ออกจากระบบ"
+                <TransitionRoot
+                  enter-active-class="transition duration-100 ease-out"
+                  enter-from-class="transform scale-95 opacity-0"
+                  enter-to-class="transform scale-100 opacity-100"
+                  leave-active-class="transition duration-75 ease-in"
+                  leave-from-class="transform scale-100 opacity-100"
+                  leave-to-class="transform scale-95 opacity-0"
                 >
-                  <LogOut class="w-5 h-5" />
-                </button>
-              </div>
+                  <MenuItems
+                    class="absolute right-0 mt-2 w-56 origin-top-right bg-white rounded-2xl shadow-xl ring-1 ring-slate-900/5 divide-y divide-slate-100 outline-none overflow-hidden"
+                  >
+                    <div class="px-1 py-1">
+                      <MenuItem v-slot="{ active }">
+                        <RouterLink
+                          to="/profile"
+                          :class="[
+                            active
+                              ? 'bg-primary/10 text-primary'
+                              : 'text-slate-700',
+                            'group flex items-center gap-3 px-4 py-3 text-sm font-bold transition-colors',
+                          ]"
+                        >
+                          <User class="w-4 h-4" />
+                          บัญชีของฉัน
+                        </RouterLink>
+                      </MenuItem>
+                      <MenuItem v-slot="{ active }">
+                        <RouterLink
+                          to="/orders"
+                          :class="[
+                            active
+                              ? 'bg-primary/10 text-primary'
+                              : 'text-slate-700',
+                            'group flex items-center gap-3 px-4 py-3 text-sm font-bold transition-colors',
+                          ]"
+                        >
+                          <Package class="w-4 h-4" />
+                          ประวัติการสั่งซื้อ
+                        </RouterLink>
+                      </MenuItem>
+                    </div>
+                    <div class="px-1 py-1">
+                      <MenuItem v-slot="{ active }">
+                        <button
+                          @click="handleLogout"
+                          :class="[
+                            active
+                              ? 'bg-rose-50 text-rose-600'
+                              : 'text-slate-500',
+                            'group flex w-full items-center gap-3 px-4 py-3 text-sm font-bold transition-colors cursor-pointer',
+                          ]"
+                        >
+                          <LogOut class="w-4 h-4" />
+                          ออกจากระบบ
+                        </button>
+                      </MenuItem>
+                    </div>
+                  </MenuItems>
+                </TransitionRoot>
+              </HeadlessMenu>
             </template>
             <template v-else>
               <button
@@ -171,8 +241,11 @@ const toggleMenu = () => {
           </button>
 
           <!-- Mobile Menu Button -->
-          <button @click="toggleMenu" class="text-gray-600 hover:text-primary">
-            <Menu v-if="!isMenuOpen" />
+          <button
+            @click="toggleMenu"
+            class="text-gray-600 hover:text-primary cursor-pointer"
+          >
+            <MenuIcon v-if="!isMenuOpen" />
             <X v-else />
           </button>
         </div>

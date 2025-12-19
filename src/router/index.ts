@@ -52,10 +52,25 @@ const routes = [
         component: () => import("../views/RequestQuotation.vue"),
       },
       {
-        path: "profile",
-        name: "Profile",
-        component: () => import("../views/Profile.vue"),
+        path: "account",
+        component: () => import("../layouts/AccountLayout.vue"),
         meta: { requiresAuth: true },
+        children: [
+          {
+            path: "",
+            redirect: "/profile",
+          },
+          {
+            path: "/profile",
+            name: "Profile",
+            component: () => import("../views/Profile.vue"),
+          },
+          {
+            path: "/orders",
+            name: "Orders",
+            component: () => import("../views/Orders.vue"),
+          },
+        ],
       },
       {
         path: ":pathMatch(.*)*",
@@ -113,7 +128,7 @@ const routes = [
         component: () => import("../views/admin/Settings.vue"),
       },
     ],
-    meta: { requiresAuth: true },
+    meta: { requiresAdmin: true },
   },
 ];
 
@@ -130,12 +145,20 @@ const router = createRouter({
 });
 
 router.beforeEach((to, _from, next) => {
-  const isAdminRoute = to.matched.some((record) => record.meta.requiresAuth);
-  const isAuthenticated = localStorage.getItem("admin_token") === "true";
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const requiresAdmin = to.matched.some((record) => record.meta.requiresAdmin);
+  const isAdminAuthenticated = localStorage.getItem("admin_token") === "true";
+  const isUserAuthenticated = localStorage.getItem("user") !== null;
 
-  if (isAdminRoute && !isAuthenticated) {
+  if (requiresAdmin && !isAdminAuthenticated) {
+    // Redirect to admin login if trying to access admin page without admin token
     next({ name: "Login" });
-  } else if (to.name === "Login" && isAuthenticated) {
+  } else if (requiresAuth && !isUserAuthenticated) {
+    // Redirect to home if trying to access profile/auth page without user login
+    // The user can then open the login modal from the header
+    next({ name: "Home" });
+  } else if (to.name === "Login" && isAdminAuthenticated) {
+    // If already logged in as admin, don't show admin login page
     next({ name: "AdminDashboard" });
   } else {
     next();

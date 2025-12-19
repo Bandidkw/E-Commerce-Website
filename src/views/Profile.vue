@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { useAuthStore } from "../stores/auth";
-import { Package, Mail, Calendar, ChevronRight } from "lucide-vue-next";
-import StatusBadge from "../components/common/StatusBadge.vue";
+import { Mail, Calendar, User, Shield, Key, Bell } from "lucide-vue-next";
+import { useToastStore } from "../stores/toast";
 
 const authStore = useAuthStore();
+const toast = useToastStore();
 
 const formatDate = (dateStr: string) => {
   return new Date(dateStr).toLocaleDateString("th-TH", {
@@ -12,191 +13,174 @@ const formatDate = (dateStr: string) => {
     day: "numeric",
   });
 };
+
+const handleUpdateProfile = () => {
+  toast.success("บันทึกการเปลี่ยนแปลงเรียบร้อยแล้ว (จำลอง)");
+};
 </script>
 
 <template>
-  <div class="min-h-screen bg-slate-50 py-16">
-    <div class="container mx-auto px-6 max-w-6xl">
-      <div class="flex flex-col lg:flex-row gap-8">
-        <!-- Sidebar: User Info -->
-        <div class="lg:w-1/3">
-          <div
-            class="bg-white rounded-[2.5rem] shadow-premium border border-slate-100 p-8 sticky top-24"
-          >
-            <div class="text-center mb-8">
-              <div
-                class="w-24 h-24 bg-gradient-to-br from-primary to-primary-light rounded-[2rem] flex items-center justify-center text-white text-4xl font-black shadow-indigo mx-auto mb-6 transform hover:rotate-6 transition-transform"
-              >
-                {{ authStore.user?.name.charAt(0).toUpperCase() }}
-              </div>
-              <h1 class="text-2xl font-black text-slate-900">
-                {{ authStore.user?.name }}
-              </h1>
-              <p class="text-slate-500 font-medium">
-                ลูกค้าคนสำคัญของ ChemCorp
-              </p>
-            </div>
-
-            <div class="space-y-4">
-              <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl">
-                <div
-                  class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm"
-                >
-                  <Mail class="w-5 h-5" />
-                </div>
-                <div>
-                  <p
-                    class="text-xs font-bold text-slate-400 uppercase tracking-wider"
-                  >
-                    อีเมล
-                  </p>
-                  <p class="text-slate-900 font-bold">
-                    {{ authStore.user?.email }}
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl">
-                <div
-                  class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm"
-                >
-                  <Calendar class="w-5 h-5" />
-                </div>
-                <div>
-                  <p
-                    class="text-xs font-bold text-slate-400 uppercase tracking-wider"
-                  >
-                    สมาชิกตั้งแต่
-                  </p>
-                  <p class="text-slate-900 font-bold">
-                    {{ formatDate(new Date().toISOString()) }}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <button
-              @click="authStore.logout()"
-              class="w-full mt-8 py-4 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-2xl font-black transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              ออกจากระบบ
-            </button>
+  <div class="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <!-- Account Details -->
+    <div
+      class="bg-white rounded-[2.5rem] shadow-premium border border-slate-100 overflow-hidden"
+    >
+      <div class="p-8 md:p-10">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-10"
+        >
+          <div>
+            <h2 class="text-2xl font-black text-slate-900 tracking-tight">
+              ข้อมูลส่วนตัว
+            </h2>
+            <p class="text-slate-500 font-medium text-sm">
+              จัดการข้อมูลพื้นฐานและการติดต่อของคุณ
+            </p>
           </div>
+          <button
+            @click="handleUpdateProfile"
+            class="px-8 py-3 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all active:scale-95 shadow-lg shadow-slate-200 cursor-pointer"
+          >
+            บันทึกข้อมูล
+          </button>
         </div>
 
-        <!-- Main Content: Order History -->
-        <div class="lg:w-2/3">
-          <div
-            class="bg-white rounded-[2.5rem] shadow-premium border border-slate-100 overflow-hidden"
-          >
-            <div
-              class="p-8 border-b border-slate-50 flex items-center justify-between bg-slate-50/50"
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="space-y-2">
+            <label
+              class="text-sm font-black text-slate-400 uppercase tracking-widest px-2"
+              >ชื่อผู้ใช้งาน</label
             >
-              <div class="flex items-center gap-4">
-                <div
-                  class="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-white shadow-indigo"
-                >
-                  <Package class="w-6 h-6" />
-                </div>
-                <div>
-                  <h2 class="text-2xl font-black text-slate-900">
-                    ประวัติการสั่งซื้อ
-                  </h2>
-                  <p class="text-slate-500 font-medium text-sm">
-                    ตรวจสอบและติดตามคำสั่งซื้อของคุณ
-                  </p>
-                </div>
-              </div>
-              <span
-                class="bg-white px-4 py-2 rounded-xl border border-slate-100 text-slate-900 font-black shadow-sm"
-              >
-                {{ authStore.orderHistory.length }} รายการ
-              </span>
+            <div class="relative group">
+              <User
+                class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors"
+              />
+              <input
+                type="text"
+                :value="authStore.user?.name"
+                class="w-full pl-14 pr-6 py-4 bg-slate-50 border border-transparent focus:border-primary/20 focus:bg-white rounded-2xl outline-none font-bold text-slate-900 transition-all focus:ring-4 focus:ring-primary/5"
+              />
             </div>
+          </div>
 
-            <div class="p-8">
-              <div
-                v-if="authStore.orderHistory.length === 0"
-                class="text-center py-20 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200"
-              >
-                <div
-                  class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"
-                >
-                  <Package class="w-10 h-10 text-slate-300" />
-                </div>
-                <h3 class="text-xl font-black text-slate-900 mb-2">
-                  ยังไม่มีประวัติการสั่งซื้อ
-                </h3>
-                <p class="text-slate-500 font-medium mb-8">
-                  เริ่มช้อปปิ้งเพื่อสะสมประวัติการสั่งซื้อของคุณ
-                </p>
-                <RouterLink
-                  to="/products"
-                  class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-2xl font-black hover:bg-blue-700 transition-all shadow-indigo hover:shadow-indigo-lg hover:-translate-y-1"
-                >
-                  ไปที่หน้าร้านค้า
-                  <ChevronRight class="w-5 h-5" />
-                </RouterLink>
-              </div>
+          <div class="space-y-2">
+            <label
+              class="text-sm font-black text-slate-400 uppercase tracking-widest px-2"
+              >ที่อยู่อีเมล</label
+            >
+            <div class="relative group">
+              <Mail
+                class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"
+              />
+              <input
+                type="email"
+                :value="authStore.user?.email"
+                disabled
+                class="w-full pl-14 pr-6 py-4 bg-slate-100 border border-transparent rounded-2xl outline-none font-bold text-slate-500 cursor-not-allowed opacity-70"
+                title="อีเมลไม่สามารถแก้ไขได้"
+              />
+            </div>
+          </div>
 
-              <div v-else class="space-y-6">
-                <div
-                  v-for="order in authStore.orderHistory"
-                  :key="order.id"
-                  class="group bg-white border border-slate-100 rounded-[2rem] hover:shadow-premium-lg transition-all duration-500 overflow-hidden"
-                >
-                  <div
-                    class="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-50"
-                  >
-                    <div class="flex items-center gap-6">
-                      <div
-                        class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors"
-                      >
-                        <Package class="w-8 h-8" />
-                      </div>
-                      <div>
-                        <p
-                          class="text-sm font-bold text-slate-400 tracking-wider uppercase mb-1"
-                        >
-                          เลขที่คำสั่งซื้อ
-                        </p>
-                        <h4 class="text-xl font-black text-slate-900">
-                          #{{ order.id }}
-                        </h4>
-                        <p class="text-slate-500 font-medium text-sm">
-                          {{ formatDate(order.date) }}
-                        </p>
-                      </div>
-                    </div>
-                    <div class="flex flex-col md:items-end gap-2">
-                      <StatusBadge :status="order.status" type="order" />
-                      <p class="text-2xl font-black text-primary">
-                        ฿{{ order.total.toLocaleString() }}
-                      </p>
-                    </div>
-                  </div>
+          <div class="space-y-2">
+            <label
+              class="text-sm font-black text-slate-400 uppercase tracking-widest px-2"
+              >วันที่สมัครสมาชิก</label
+            >
+            <div class="relative group">
+              <Calendar
+                class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"
+              />
+              <input
+                type="text"
+                :value="formatDate(new Date().toISOString())"
+                disabled
+                class="w-full pl-14 pr-6 py-4 bg-slate-100 border border-transparent rounded-2xl outline-none font-bold text-slate-500 cursor-not-allowed opacity-70"
+              />
+            </div>
+          </div>
 
-                  <div class="px-8 py-6 bg-slate-50/50">
-                    <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-                      <div
-                        v-for="item in order.items"
-                        :key="item.id"
-                        class="flex-shrink-0 w-16 h-16 bg-white rounded-xl border border-slate-100 overflow-hidden shadow-sm"
-                      >
-                        <img
-                          :src="item.image"
-                          :alt="item.name"
-                          class="w-full h-full object-cover"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div class="space-y-2">
+            <label
+              class="text-sm font-black text-slate-400 uppercase tracking-widest px-2"
+              >เบอร์โทรศัพท์</label
+            >
+            <div class="relative group">
+              <Bell
+                class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors"
+              />
+              <input
+                type="text"
+                placeholder="ระบุเบอร์โทรศัพท์ของคุณ"
+                class="w-full pl-14 pr-6 py-4 bg-slate-50 border border-transparent focus:border-primary/20 focus:bg-white rounded-2xl outline-none font-bold text-slate-900 transition-all focus:ring-4 focus:ring-primary/5"
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Security Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div
+        class="bg-white rounded-[2.5rem] shadow-premium border border-slate-100 p-8 group hover:border-primary/20 transition-all duration-500"
+      >
+        <div class="flex items-start justify-between mb-8">
+          <div
+            class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 group-hover:scale-110 transition-transform duration-500"
+          >
+            <Key class="w-7 h-7" />
+          </div>
+          <button
+            class="text-indigo-600 font-bold hover:underline cursor-pointer"
+          >
+            แก้ไข
+          </button>
+        </div>
+        <h3 class="text-xl font-black text-slate-900 mb-2">รหัสผ่าน</h3>
+        <p class="text-slate-500 font-medium text-sm mb-6">
+          เปลี่ยนรหัสผ่านเพื่อความปลอดภัยที่ดียิ่งขึ้น
+        </p>
+        <div class="flex items-center gap-2">
+          <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+          <span class="text-sm font-bold text-slate-400 tracking-widest"
+            >••••••••••••</span
+          >
+        </div>
+      </div>
+
+      <div
+        class="bg-white rounded-[2.5rem] shadow-premium border border-slate-100 p-8 group hover:border-emerald-500/20 transition-all duration-500"
+      >
+        <div class="flex items-start justify-between mb-8">
+          <div
+            class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-transform duration-500"
+          >
+            <Shield class="w-7 h-7" />
+          </div>
+          <button
+            class="text-emerald-600 font-bold hover:underline cursor-pointer"
+          >
+            เปิดใช้งาน
+          </button>
+        </div>
+        <h3 class="text-xl font-black text-slate-900 mb-2">
+          การยืนยันตัวตน 2 ขั้นตอน
+        </h3>
+        <p class="text-slate-500 font-medium text-sm mb-6">
+          เพิ่มระดับการปกป้องบัญชีของคุณให้ปลอดภัยสูงสุด
+        </p>
+        <span
+          class="px-3 py-1 bg-slate-100 text-slate-400 text-xs font-black rounded-lg uppercase tracking-wider"
+          >ปิดใช้งาน</span
+        >
+      </div>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.shadow-premium {
+  box-shadow: 0 10px 50px -10px rgba(0, 0, 0, 0.04);
+}
+</style>

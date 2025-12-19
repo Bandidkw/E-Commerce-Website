@@ -190,7 +190,7 @@ const placeOrder = async () => {
             <button
               type="submit"
               :disabled="isProcessing"
-              class="w-full py-4 bg-primary hover:bg-blue-700 text-white rounded-lg font-bold text-lg transition-colors shadow-lg shadow-primary/20 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+              class="w-full py-4 bg-primary hover:bg-blue-700 text-white rounded-lg font-bold text-lg transition-colors shadow-lg shadow-primary/20 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
             >
               <span v-if="isProcessing">กำลังดำเนินการ...</span>
               <span v-else>สั่งซื้อสินค้า (${{ total.toFixed(2) }})</span>
