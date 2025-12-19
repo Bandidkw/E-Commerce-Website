@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import { Phone, Mail, MapPin } from "lucide-vue-next";
+
+defineEmits<{
+  (e: "open-login"): void;
+}>();
 </script>
 
 <template>
@@ -227,6 +231,13 @@ import { Phone, Mail, MapPin } from "lucide-vue-next";
               >Terms of Service</span
             >
           </div>
+          <div class="w-px h-4 bg-slate-800"></div>
+          <button
+            @click="$emit('open-login')"
+            class="text-slate-500 hover:text-primary transition-colors text-xs font-bold uppercase tracking-widest cursor-pointer"
+          >
+            ระบบจัดการ (Admin)
+          </button>
         </div>
       </div>
     </div>

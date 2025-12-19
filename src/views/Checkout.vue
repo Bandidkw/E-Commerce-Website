@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useCartStore } from "../stores/cart";
+import { useAuthStore } from "../stores/auth";
 import { useToastStore } from "../stores/toast";
-import { CheckCircle } from "lucide-vue-next";
+import { CheckCircle, ArrowRight } from "lucide-vue-next";
 
 const cartStore = useCartStore();
+const authStore = useAuthStore();
 const toast = useToastStore();
 
 const form = ref({
@@ -34,11 +36,21 @@ const placeOrder = async () => {
   isSuccess.value = true;
   toast.success("สั่งซื้อสินค้าเรียบร้อยแล้ว");
 
+  // Save to order history if logged in
+  if (authStore.isLoggedIn) {
+    const newOrder = {
+      id: Math.floor(100000 + Math.random() * 900000).toString(),
+      date: new Date().toISOString(),
+      items: [...cartStore.items],
+      total: total.value,
+      status: "รอดำเนินการ",
+    };
+    authStore.addOrderToHistory(newOrder);
+  }
+
   // Clear cart after short delay
   setTimeout(() => {
     cartStore.clearCart();
-    // In a real app, redirect to success page
-    // router.push('/success')
   }, 1000);
 };
 </script>
@@ -60,12 +72,22 @@ const placeOrder = async () => {
         <p class="text-gray-600 mb-8">
           ขอบคุณสำหรับการสั่งซื้อ เราจะส่งอีเมลยืนยันให้คุณในไม่ช้า
         </p>
-        <RouterLink
-          to="/"
-          class="inline-block px-8 py-3 bg-primary text-white rounded-lg font-bold hover:bg-blue-700 transition-colors"
-        >
-          ซื้อสินค้าต่อ
-        </RouterLink>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <RouterLink
+            to="/"
+            class="inline-block px-8 py-3 bg-slate-100 text-slate-700 rounded-lg font-bold hover:bg-slate-200 transition-colors"
+          >
+            ซื้อสินค้าต่อ
+          </RouterLink>
+          <RouterLink
+            v-if="authStore.isLoggedIn"
+            to="/profile"
+            class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary text-white rounded-lg font-bold hover:bg-blue-700 transition-colors shadow-indigo"
+          >
+            ดูประวัติการสั่งซื้อ
+            <ArrowRight class="w-4 h-4" />
+          </RouterLink>
+        </div>
       </div>
 
       <div

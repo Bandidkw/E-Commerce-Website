@@ -7,6 +7,8 @@ import {
   AlertTriangle,
   ArrowRight,
 } from "lucide-vue-next";
+import SalesTrendChart from "../../components/admin/charts/SalesTrendChart.vue";
+import CategoryDistributionChart from "../../components/admin/charts/CategoryDistributionChart.vue";
 
 const stats = ref([
   {
@@ -150,6 +152,46 @@ const getStatusColor = (status: string) => {
             {{ stat.value }}
           </p>
         </div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Sales Trend Chart -->
+      <div
+        class="lg:col-span-2 bg-white p-8 rounded-[2rem] shadow-premium border border-slate-100"
+      >
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <h3 class="text-xl font-black text-slate-900">ยอดขายในรอบ 7 วัน</h3>
+            <p class="text-sm text-slate-500 font-medium">
+              สรุปแนวโน้มรายได้รายสัปดาห์
+            </p>
+          </div>
+          <div class="flex gap-2">
+            <span
+              class="px-3 py-1 bg-emerald-50 text-emerald-600 text-[10px] font-black uppercase rounded-lg border border-emerald-100"
+            >
+              +12.5% สูงขึ้น
+            </span>
+          </div>
+        </div>
+        <SalesTrendChart />
+      </div>
+
+      <!-- Category Distribution Chart -->
+      <div
+        class="bg-white p-8 rounded-[2rem] shadow-premium border border-slate-100"
+      >
+        <div class="mb-8">
+          <h3 class="text-xl font-black text-slate-900">
+            สัดส่วนยอดขายตามหมวดหมู่
+          </h3>
+          <p class="text-sm text-slate-500 font-medium">
+            แบ่งตามประเภทสินค้าหลัก
+          </p>
+        </div>
+        <CategoryDistributionChart />
       </div>
     </div>
 

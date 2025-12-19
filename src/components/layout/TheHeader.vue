@@ -1,17 +1,28 @@
 <script setup lang="ts">
 import { RouterLink, useRouter } from "vue-router";
-import { Menu, X, ShoppingBag, Search, User } from "lucide-vue-next";
+import { Menu, X, ShoppingBag, Search } from "lucide-vue-next";
 import { ref } from "vue";
 import { useCartStore } from "../../stores/cart";
+import { useAuthStore } from "../../stores/auth";
+import { useToastStore } from "../../stores/toast";
 
 const cartStore = useCartStore();
+const authStore = useAuthStore();
+const toast = useToastStore();
 const router = useRouter();
 const searchQuery = ref("");
 const isMenuOpen = ref(false);
 
 const emit = defineEmits<{
   (e: "open-login"): void;
+  (e: "open-customer-login", mode?: "login" | "register"): void;
 }>();
+
+const handleLogout = () => {
+  authStore.logout();
+  toast.success("ออกจากระบบเรียบร้อยแล้ว");
+  router.push("/");
+};
 
 const handleSearch = () => {
   if (searchQuery.value.trim()) {
@@ -107,14 +118,42 @@ const toggleMenu = () => {
             </span>
           </button>
 
-          <!-- Admin Login Button (Desktop) -->
-          <button
-            @click="emit('open-login')"
-            class="text-slate-600 hover:text-primary transition-smooth hover-lift cursor-pointer p-2 rounded-xl hover:bg-primary/5"
-            title="เข้าสู่ระบบแอดมิน"
-          >
-            <User class="w-6 h-6" />
-          </button>
+          <!-- User Profile / Login -->
+          <div class="flex items-center gap-2">
+            <template v-if="authStore.isLoggedIn">
+              <div class="flex items-center gap-3">
+                <RouterLink
+                  to="/profile"
+                  class="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-primary/10 text-slate-700 hover:text-primary rounded-xl transition-all duration-300 font-bold group"
+                >
+                  <div
+                    class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white text-xs shadow-indigo group-hover:rotate-12 transition-transform"
+                  >
+                    {{ authStore.user?.name.charAt(0).toUpperCase() }}
+                  </div>
+                  <span class="max-w-[100px] truncate">{{
+                    authStore.user?.name
+                  }}</span>
+                </RouterLink>
+
+                <button
+                  @click="handleLogout"
+                  class="p-2 text-slate-400 hover:text-rose-500 transition-colors cursor-pointer"
+                  title="ออกจากระบบ"
+                >
+                  <LogOut class="w-5 h-5" />
+                </button>
+              </div>
+            </template>
+            <template v-else>
+              <button
+                @click="emit('open-customer-login')"
+                class="text-slate-600 hover:text-primary font-bold transition-smooth px-4 py-2 rounded-xl hover:bg-primary/5 cursor-pointer"
+              >
+                เข้าสู่ระบบ
+              </button>
+            </template>
+          </div>
         </nav>
 
         <div class="flex items-center gap-4 md:hidden">
@@ -129,14 +168,6 @@ const toggleMenu = () => {
             >
               {{ cartStore.itemCount }}
             </span>
-          </button>
-
-          <!-- Admin Login Button (Mobile Header) -->
-          <button
-            @click="emit('open-login')"
-            class="text-gray-600 hover:text-primary transition-colors cursor-pointer"
-          >
-            <User class="w-6 h-6" />
           </button>
 
           <!-- Mobile Menu Button -->
